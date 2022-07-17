@@ -14,13 +14,13 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
+import UserProfile from "../UserProfile/UserProfile";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
+import Explore from "../Explore/Explore";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +48,10 @@ function App() {
             <AboutPage />
           </Route>
 
+          <Route exact path="/explore">
+            <Explore />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -57,15 +61,7 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
+            <UserProfile />
           </ProtectedRoute>
 
           <Route exact path="/login">
