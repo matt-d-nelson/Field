@@ -22,6 +22,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import "./App.css";
 import Explore from "../Explore/Explore";
 import Details from "../Details/Details";
+import NewPost from "../NewPost/NewPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,12 +54,12 @@ function App() {
           </Route>
 
           {/* ------------------PROTECTED ROUTES------------------ */}
-          <ProtectedRoute
-            // logged in shows UserProfile else shows LoginPage
-            exact
-            path="/user"
-          >
+          {/*logged in shows protected component else shows LoginPage */}
+          <ProtectedRoute exact path="/user">
             <UserProfile />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/new">
+            <NewPost />
           </ProtectedRoute>
 
           {/* ------------------VARIABLE ROUTES------------------ */}
