@@ -30,11 +30,46 @@ function NewPost() {
   const [tags, setTags] = useState("");
 
   //---------------------EVENT HANDLERS---------------------//
+
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const onDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const onTagsChange = (event) => {
+    setTags(event.target.value);
+  };
+
+  const onPictureChange = (event) => {
+    setPicture(event.target.files[0]);
+    // split path and select last index to only display filename
+    const splitPath = event.target.value.split("\\");
+    setPicturePath(splitPath[splitPath.length - 1]);
+  };
+
+  const onAudioChange = (event) => {
+    setAudio(event.target.files[0]);
+    const splitPath = event.target.value.split("\\");
+    setAudioPath(splitPath[splitPath.length - 1]);
+  };
+
   const onCancel = () => {
     history.push("/user");
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    const newPost = {
+      title: title,
+      description: description,
+      tags: tags,
+      lat: markers[0].lat,
+      lng: markers[0].lng,
+    };
+    console.log(newPost);
+  };
 
   //---------------------JSX RETURN---------------------//
   return (
@@ -48,7 +83,12 @@ function NewPost() {
         <Grid item xs={6}>
           <Grid container direction="column" spacing={1}>
             <Grid item>
-              <TextField variant="filled" label="title" fullWidth />
+              <TextField
+                variant="filled"
+                label="title"
+                fullWidth
+                onChange={onTitleChange}
+              />
             </Grid>
             <Grid item>
               <TextField
@@ -57,19 +97,35 @@ function NewPost() {
                 multiline
                 minRows={10}
                 fullWidth
+                onChange={onDescriptionChange}
               />
             </Grid>
             <Grid item>
-              <TextField variant="filled" label="tags" fullWidth />
+              <TextField
+                variant="filled"
+                label="tags"
+                fullWidth
+                onChange={onTagsChange}
+              />
             </Grid>
             <Grid item>
               <ButtonGroup fullWidth>
-                <Button componenet="label" variant="contained">
-                  <input name="picture" type="file" hidden />
+                <Button component="label" variant="contained">
+                  <input
+                    name="audio"
+                    type="file"
+                    onChange={onAudioChange}
+                    hidden
+                  />
                   <Typography>{audioPath}</Typography>
                 </Button>
-                <Button componenet="label" variant="contained">
-                  <input name="picture" type="file" hidden />
+                <Button component="label" variant="contained">
+                  <input
+                    type="file"
+                    name="picture"
+                    onChange={onPictureChange}
+                    hidden
+                  />
                   <Typography>{picturePath}</Typography>
                 </Button>
               </ButtonGroup>
