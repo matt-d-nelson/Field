@@ -53,7 +53,6 @@ function MapCreate(props) {
 
   return (
     <div>
-      <Typography>🍁</Typography>
       <MapSearch panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
