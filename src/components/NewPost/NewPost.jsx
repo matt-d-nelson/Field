@@ -61,14 +61,18 @@ function NewPost() {
   };
 
   const onSubmit = () => {
-    const newPost = {
+    // temp for input verification
+    const newPostTemp = {
       title: title,
       description: description,
       tags: tags,
       lat: markers[0].lat,
       lng: markers[0].lng,
     };
-    console.log(newPost);
+    console.log(newPostTemp);
+    if ((title = "")) {
+    }
+    const newPost = new FormData();
   };
 
   //---------------------JSX RETURN---------------------//

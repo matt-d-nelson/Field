@@ -23,6 +23,7 @@ import "./App.css";
 import Explore from "../Explore/Explore";
 import Details from "../Details/Details";
 import NewPost from "../NewPost/NewPost";
+import GlobalModal from "../GlobalModal/GlobalModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,10 @@ function App() {
   return (
     <Router>
       <div>
+        {/* ------------------GLOBAL COMPONENTS------------------ */}
         <Nav />
+        {/* alert modal that is controled by reducer */}
+        <GlobalModal />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
