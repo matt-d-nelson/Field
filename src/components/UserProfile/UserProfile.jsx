@@ -16,6 +16,7 @@ function UserProfile() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
+      <p>{JSON.stringify(user)}</p>
       <p>View 3.0 / flesh out with profile info and post details</p>
       <p>Your ID is: {user.id}</p>
       <Button variant="outlined" onClick={newPost}>
