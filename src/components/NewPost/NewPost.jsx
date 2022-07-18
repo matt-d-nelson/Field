@@ -21,7 +21,7 @@ function NewPost() {
 
   //---------------------LOCAL STATE---------------------//
   const [markers, setMarkers] = useState([]);
-  const [title, setTitle] = useState([]);
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
   const [picturePath, setPicturePath] = useState("upload picture");
@@ -61,18 +61,60 @@ function NewPost() {
   };
 
   const onSubmit = () => {
-    // temp for input verification
-    const newPostTemp = {
-      title: title,
-      description: description,
-      tags: tags,
-      lat: markers[0].lat,
-      lng: markers[0].lng,
-    };
-    console.log(newPostTemp);
-    if ((title = "")) {
+    console.log(title);
+    // verify inputs
+    if (
+      title === "" ||
+      markers.length === 0 ||
+      verifyAudio(audioPath) ||
+      verifyPicture(picturePath)
+    ) {
+      // open global modal with error message if bad input
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: {
+          open: true,
+          type: "error",
+          message:
+            "Please select a location on the map, input a title, and upload an audio and image file.",
+        },
+      });
+    } else {
+      // temp for input verification
+      const newPostTemp = {
+        title: title,
+        description: description,
+        tags: tags,
+        lat: markers[0].lat,
+        lng: markers[0].lng,
+      };
+      console.log(newPostTemp);
     }
     const newPost = new FormData();
+  };
+
+  //---------------------HELPER FUNCTIONS---------------------//
+  const verifyAudio = (audioToVerify) => {
+    const splitAudio = audioToVerify.split(".");
+    const fileExtension = splitAudio[splitAudio.length - 1].toLowerCase();
+    if (fileExtension === "mp3" || fileExtension === "wav") {
+      return false;
+    }
+    return true;
+  };
+
+  const verifyPicture = (imageToVerify) => {
+    const splitImage = imageToVerify.split(".");
+    const fileExtension = splitImage[splitImage.length - 1].toLowerCase();
+    if (
+      fileExtension === "jpg" ||
+      fileExtension === "jpeg" ||
+      fileExtension === "png" ||
+      fileExtension === "gif"
+    ) {
+      return false;
+    }
+    return true;
   };
 
   //---------------------JSX RETURN---------------------//
