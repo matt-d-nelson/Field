@@ -31,7 +31,7 @@ function NewPost() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <Typography variant="h3">New Post</Typography>
       <p>View 3.2 / add form components to create a new post</p>
       <Grid container>
