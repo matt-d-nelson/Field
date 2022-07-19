@@ -80,7 +80,6 @@ function MapView() {
   return (
     <div>
       <Search panTo={panTo} />
-      <p>{JSON.stringify(posts)}</p>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -88,7 +87,7 @@ function MapView() {
         options={options}
         onLoad={onMapLoad}
       >
-        {/* {posts.map((marker) => (
+        {posts.map((marker) => (
           <Marker
             position={{ lat: Number(marker.lat), lng: Number(marker.lng) }}
             key={marker.lat}
@@ -97,7 +96,7 @@ function MapView() {
               setSelected(marker);
             }}
           />
-        ))} */}
+        ))}
         {selected ? (
           // info window is a gmaps component that can take one child and hold any components
           <InfoWindow
@@ -107,10 +106,10 @@ function MapView() {
             }}
           >
             <div>
-              <img src={selected.picture.slice(7)} style={{ width: "100px" }} />
+              <img src={selected.image} style={{ width: "100px" }} />
               <br />
               <audio controls>
-                <source src={selected.audio.slice(7)} type="audio/mp3" />
+                <source src={selected.audio} type="audio/mp3" />
               </audio>
             </div>
           </InfoWindow>
