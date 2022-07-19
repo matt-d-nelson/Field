@@ -80,6 +80,7 @@ function MapView() {
   return (
     <div>
       <Search panTo={panTo} />
+      <p>{JSON.stringify(posts)}</p>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
@@ -92,6 +93,7 @@ function MapView() {
             position={{ lat: Number(marker.lat), lng: Number(marker.lng) }}
             key={marker.lat}
             onClick={() => {
+              setSelected(null);
               setSelected(marker);
             }}
           />

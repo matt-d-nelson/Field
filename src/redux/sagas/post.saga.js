@@ -1,6 +1,6 @@
 //---------------------IMPORTS---------------------//
 import axios from "axios";
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 //---------------------HELPER FUNCTIONS---------------------//
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -21,10 +21,6 @@ function* addPost(action) {
       data: action.payload,
       headers: { "Content-Type": "multipart/form-data" },
     });
-    // const res = yield axios({
-    //   method: "get",
-    //   url: "/api/asset",
-    // });
     yield put({
       type: "OPEN_MODAL",
       payload: {
@@ -49,7 +45,7 @@ function* addPost(action) {
 }
 
 function* postSaga() {
-  yield takeLatest("ADD_POST", addPost);
+  yield takeEvery("ADD_POST", addPost);
 }
 
 export default postSaga;

@@ -3,12 +3,20 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const upload = require("../modules/multer");
 
-/**
- * GET route template
- */
+// get
 router.get("/", (req, res) => {
   // GET route code here
-  res.send("ribbit");
+  getAllPostsQueryString = `SELECT * FROM "post" ORDER BY id ASC;`;
+
+  pool
+    .query(getAllPostsQueryString)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 // post
