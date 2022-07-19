@@ -17,10 +17,14 @@ function* addPost(action) {
     // send post request
     const res = yield axios({
       method: "post",
-      url: "/asset",
+      url: "/api/asset",
       data: action.payload,
       headers: { "Content-Type": "multipart/form-data" },
     });
+    // const res = yield axios({
+    //   method: "get",
+    //   url: "/api/asset",
+    // });
     yield put({
       type: "OPEN_MODAL",
       payload: {
