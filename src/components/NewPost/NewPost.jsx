@@ -13,9 +13,11 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 function NewPost() {
   //---------------------IMPORTED OBJECTS---------------------//
+  const userData = useSelector((store) => store.user);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -82,6 +84,7 @@ function NewPost() {
     } else {
       // temp for input verification
       const newPostTemp = {
+        user_id: userData.id,
         title: title,
         description: description,
         tags: tags,
@@ -89,8 +92,19 @@ function NewPost() {
         lng: markers[0].lng,
       };
       console.log(newPostTemp);
+      // gather inputs as form data
+      const newPost = new FormData();
+      newPost.append("user_id", userData.id);
+      newPost.append("title", title);
+      newPost.append("description", description);
+      newPost.append("lat", markers[0].lat);
+      newPost.append("lng", markers[0].lng);
+      newPost.append("tags", tags);
+      newPost.append("picture", picture);
+      newPost.append("audio", audio);
+      // dispach POST request to saga
+      dispatch({ type: "ADD_POST", payload: newPost });
     }
-    const newPost = new FormData();
   };
 
   //---------------------HELPER FUNCTIONS---------------------//
