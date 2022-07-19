@@ -1,4 +1,12 @@
-import { Button, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -86,6 +94,9 @@ function MapView() {
         center={center}
         options={options}
         onLoad={onMapLoad}
+        onClick={() => {
+          setSelected(null);
+        }}
       >
         {posts.map((marker) => (
           <Marker
@@ -106,11 +117,26 @@ function MapView() {
             }}
           >
             <div>
-              <img src={selected.image} style={{ width: "100px" }} />
-              <br />
-              <audio controls>
-                <source src={selected.audio} type="audio/mp3" />
-              </audio>
+              <Card
+                style={{ boxShadow: "none", backgroundColor: "transparent" }}
+              >
+                <CardHeader title={selected.title}></CardHeader>
+                <CardContent>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <img src={selected.image} width="150" />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography>{selected.description}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <audio controls>
+                        <source src={selected.audio} type="audio/mp3" />
+                      </audio>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
             </div>
           </InfoWindow>
         ) : null}
