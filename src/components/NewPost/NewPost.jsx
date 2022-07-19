@@ -17,9 +17,11 @@ import { useSelector } from "react-redux";
 
 function NewPost() {
   //---------------------IMPORTED OBJECTS---------------------//
-  const userData = useSelector((store) => store.user);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  //---------------------REDUCER STATE---------------------//
+  const userData = useSelector((store) => store.user);
 
   //---------------------LOCAL STATE---------------------//
   const [markers, setMarkers] = useState([]);

@@ -32,8 +32,8 @@ UPDATE "user" SET image = 'test image', about = 'test about' WHERE id = 1;
 CREATE TABLE "post" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
-	"lat" INT NOT NULL,
-	"lng" INT NOT NULL,
+	"lat" VARCHAR(120) NOT NULL,
+	"lng" VARCHAR(120) NOT NULL,
 	"title" VARCHAR(120) NOT NULL,
 	"description" TEXT,
 	"audio" VARCHAR(500) NOT NULL,
