@@ -61,3 +61,11 @@ DELETE FROM "post" WHERE id = 1;
 
 --SELECT ALL POSTS FROM A SPECIFIC USER
 SELECT * FROM "post" WHERE user_id = 1;
+
+--------------------------JOIN CALLS--------------------------
+
+SELECT 
+"user".username,  "user".image as profile_image, "user".about as profile_about,
+"post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+FROM "post"
+JOIN "user" ON "user".id = "post".user_id;

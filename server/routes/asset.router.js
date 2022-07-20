@@ -6,7 +6,11 @@ const upload = require("../modules/multer");
 // get
 router.get("/", (req, res) => {
   // GET route code here
-  getAllPostsQueryString = `SELECT * FROM "post" ORDER BY id ASC;`;
+  getAllPostsQueryString = `SELECT 
+                            "user".username,  "user".image as profile_image, "user".about as profile_about,
+                            "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+                            FROM "post"
+                            JOIN "user" ON "user".id = "post".user_id;`;
 
   pool
     .query(getAllPostsQueryString)

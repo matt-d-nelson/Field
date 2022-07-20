@@ -3,6 +3,8 @@ import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
 //---------------------SAGAS---------------------//
+
+// get all posts
 function* getPosts() {
   try {
     const posts = yield axios.get("/api/asset");
@@ -23,6 +25,7 @@ function* getPosts() {
 
 function* getSaga() {
   yield takeLatest("GET_POSTS", getPosts);
+  //   yield takeLatest("GET_USERNAMES", getUsernames);
 }
 
 export default getSaga;
