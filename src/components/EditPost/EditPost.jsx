@@ -81,14 +81,8 @@ function EditPost() {
   };
 
   const onSubmit = () => {
-    console.log(title);
     // verify inputs
-    if (
-      title === "" ||
-      markers.length === 0 ||
-      verifyAudio(audioPath) ||
-      verifyPicture(picturePath)
-    ) {
+    if (verifyAudio(audioPath) || verifyPicture(picturePath)) {
       // open global modal with error message if bad input
       dispatch({
         type: "OPEN_MODAL",
@@ -96,7 +90,7 @@ function EditPost() {
           open: true,
           type: "error",
           message:
-            "Please select a location on the map, input a title, and upload an audio and image file.",
+            "Please input a title and ensure that any new audio and/or image files are of a supported file type.",
         },
       });
     } else {
@@ -112,7 +106,7 @@ function EditPost() {
       console.log(newPostTemp);
       // gather inputs as form data
       const newPost = new FormData();
-      newPost.append("user_id", userData.id);
+      newPost.append("id", thisPost.id);
       newPost.append("title", title);
       newPost.append("description", description);
       newPost.append("lat", markers[0].lat);
@@ -121,7 +115,7 @@ function EditPost() {
       newPost.append("picture", picture);
       newPost.append("audio", audio);
       // dispach POST request to saga
-      dispatch({ type: "ADD_POST", payload: newPost });
+      dispatch({ type: "UPDATE_POST", payload: newPost });
     }
   };
 
@@ -129,7 +123,11 @@ function EditPost() {
   const verifyAudio = (audioToVerify) => {
     const splitAudio = audioToVerify.split(".");
     const fileExtension = splitAudio[splitAudio.length - 1].toLowerCase();
-    if (fileExtension === "mp3" || fileExtension === "wav") {
+    if (
+      fileExtension === "mp3" ||
+      fileExtension === "wav" ||
+      fileExtension === "upload audio"
+    ) {
       return false;
     }
     return true;
@@ -142,7 +140,8 @@ function EditPost() {
       fileExtension === "jpg" ||
       fileExtension === "jpeg" ||
       fileExtension === "png" ||
-      fileExtension === "gif"
+      fileExtension === "gif" ||
+      fileExtension === "upload picture"
     ) {
       return false;
     }

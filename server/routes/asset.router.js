@@ -64,4 +64,17 @@ router.post(
   }
 );
 
+// put
+router.put(
+  "/",
+  upload.fields([
+    { name: "picture", maxCount: 1 },
+    { name: "audio", maxCount: 1 },
+  ]),
+  (req, res) => {
+    console.log(req.body);
+    res.send("ribbit");
+  }
+);
+
 module.exports = router;
