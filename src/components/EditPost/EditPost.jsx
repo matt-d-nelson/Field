@@ -160,7 +160,11 @@ function EditPost() {
           <p>{JSON.stringify(thisPost)}</p>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <MapCreate setMarkers={setMarkers} markers={markers} />
+              <MapCreate
+                setMarkers={setMarkers}
+                markers={markers}
+                loc={{ lat: Number(thisPost.lat), lng: Number(thisPost.lng) }}
+              />
             </Grid>
             <Grid item xs={6}>
               <Grid container direction="column" spacing={1}>

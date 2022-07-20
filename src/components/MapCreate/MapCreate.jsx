@@ -57,7 +57,7 @@ function MapCreate(props) {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
-        center={center}
+        center={props.loc === undefined ? center : props.loc}
         options={options}
         onLoad={onMapLoad}
         onClick={setMarkerLocation}
