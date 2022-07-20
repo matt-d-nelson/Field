@@ -8,9 +8,26 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-//---------------------JSX RETURN---------------------//
 function PostCardDisplay(props) {
+  //---------------------IMPORTED OBJECTS---------------------//
+  const history = useHistory();
+
+  //---------------------EVENT HANDLERS---------------------//
+  const onEdit = () => {
+    history.push(`/edit/${props.selected.id}`);
+  };
+  const onAvatar = () => {
+    //nav to profile
+    if ((props.user.id = props.selected.user_id)) {
+      history.push("/user");
+    } else {
+      console.log("navigate to forign profile");
+    }
+  };
+
+  //---------------------JSX RETURN---------------------//
   return (
     <div>
       <CardHeader
@@ -19,7 +36,7 @@ function PostCardDisplay(props) {
         avatar={
           <Avatar>
             {/* add navigation to profile page on click */}
-            <Button>{props.selected.username[0]}</Button>
+            <Button onClick={onAvatar}>{props.selected.username[0]}</Button>
           </Avatar>
         }
       />
@@ -48,7 +65,7 @@ function PostCardDisplay(props) {
           {props.user.id === props.selected.user_id ? (
             <Grid item>
               {/* navigate to edit window on click */}
-              <Button>edit</Button>
+              <Button onClick={onEdit}>edit</Button>
             </Grid>
           ) : null}
         </Grid>

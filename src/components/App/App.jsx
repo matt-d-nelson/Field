@@ -21,9 +21,9 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
 import Explore from "../Explore/Explore";
-import Details from "../Details/Details";
 import NewPost from "../NewPost/NewPost";
 import GlobalModal from "../GlobalModal/GlobalModal";
+import EditPost from "../EditPost/EditPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,10 +52,6 @@ function App() {
           <Route exact path="/explore">
             <Explore />
           </Route>
-          {/* url param with id of the post details to load */}
-          <Route path="/details/:id">
-            <Details />
-          </Route>
 
           {/* ------------------PROTECTED ROUTES------------------ */}
           {/*logged in shows protected component else shows LoginPage */}
@@ -64,6 +60,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/new">
             <NewPost />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/edit/:id">
+            <EditPost />
           </ProtectedRoute>
 
           {/* ------------------VARIABLE ROUTES------------------ */}
