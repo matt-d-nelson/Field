@@ -59,6 +59,8 @@ function MapView() {
     dispatch({ type: "GET_POSTS" });
   }, []);
 
+  //---------------------EVENT HANDLERS---------------------//
+
   //---------------------GOOGLE MAP SETUP---------------------//
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,

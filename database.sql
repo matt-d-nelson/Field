@@ -68,4 +68,5 @@ SELECT
 "user".username,  "user".image as profile_image, "user".about as profile_about,
 "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
 FROM "post"
-JOIN "user" ON "user".id = "post".user_id;
+JOIN "user" ON "user".id = "post".user_id
+ORDER BY "post".id DESC;

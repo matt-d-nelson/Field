@@ -34,7 +34,7 @@ function PostCardDisplay(props) {
                 <Typography>{props.selected.title}</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body1">
+                <Typography variant="body1" paragraph>
                   {props.selected.description}
                 </Typography>
               </Grid>
