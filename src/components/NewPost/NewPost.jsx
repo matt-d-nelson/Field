@@ -3,6 +3,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // components
 import MapCreate from "../MapCreate/MapCreate";
 // styling
@@ -13,7 +14,6 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
 
 function NewPost() {
   //---------------------IMPORTED OBJECTS---------------------//
