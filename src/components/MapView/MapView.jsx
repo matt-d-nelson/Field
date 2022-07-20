@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Card,
   CardContent,
@@ -22,7 +23,7 @@ import { useCallback, useRef } from "react";
 import libraries from "../MapLibraries/MapLibraries";
 import Search from "../MapSearch/MapSearch";
 
-//-------------------------------------- map container style as nessicary
+//-------------------------------------- map container style as needed
 const mapContainerStyle = {
   height: "600px",
 };
@@ -44,6 +45,7 @@ function MapView() {
 
   //---------------------REDUCER STATE---------------------//
   const posts = useSelector((store) => store.posts);
+  const user = useSelector((store) => store.user);
 
   //---------------------LOCAL STATE---------------------//
   const [selected, setSelected] = useState(null);
@@ -120,22 +122,47 @@ function MapView() {
               <Card
                 style={{ boxShadow: "none", backgroundColor: "transparent" }}
               >
-                <CardHeader title={selected.title}></CardHeader>
-                <CardContent>
-                  <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                      <img src={selected.image} width="150" />
+                <div>
+                  <CardHeader
+                    style={{ textAlign: "left" }}
+                    title={selected.username}
+                    avatar={
+                      <Avatar>
+                        {/* add navigation to profile page on click */}
+                        <Button>{selected.username[0]}</Button>
+                      </Avatar>
+                    }
+                  />
+                  <CardContent>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        <img src={selected.image} width="150" />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Grid container direction="column" spacing={1}>
+                          <Grid item>
+                            <Typography>{selected.title}</Typography>
+                          </Grid>
+                          <Grid item>
+                            <Typography variant="body1">
+                              {selected.description}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item>
+                        <audio controls>
+                          <source src={selected.audio} type="audio/mp3" />
+                        </audio>
+                      </Grid>
+                      {user.id === selected.user_id ? (
+                        <Grid item>
+                          <Button>edit</Button>
+                        </Grid>
+                      ) : null}
                     </Grid>
-                    <Grid item xs={6}>
-                      <Typography>{selected.description}</Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <audio controls>
-                        <source src={selected.audio} type="audio/mp3" />
-                      </audio>
-                    </Grid>
-                  </Grid>
-                </CardContent>
+                  </CardContent>
+                </div>
               </Card>
             </div>
           </InfoWindow>
