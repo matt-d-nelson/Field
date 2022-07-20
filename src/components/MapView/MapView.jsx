@@ -1,3 +1,5 @@
+//---------------------IMPORTS---------------------//
+// styling
 import {
   Avatar,
   Button,
@@ -8,20 +10,21 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+// libraries
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import { useCallback, useRef } from "react";
+// components
 import {
   GoogleMap,
   InfoWindow,
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
-import { useCallback, useRef } from "react";
-
 import libraries from "../MapLibraries/MapLibraries";
 import Search from "../MapSearch/MapSearch";
+import PostCardDisplay from "../PostCardDisplay/PostCardDisplay";
 
 //-------------------------------------- map container style as needed
 const mapContainerStyle = {
@@ -122,47 +125,7 @@ function MapView() {
               <Card
                 style={{ boxShadow: "none", backgroundColor: "transparent" }}
               >
-                <div>
-                  <CardHeader
-                    style={{ textAlign: "left" }}
-                    title={selected.username}
-                    avatar={
-                      <Avatar>
-                        {/* add navigation to profile page on click */}
-                        <Button>{selected.username[0]}</Button>
-                      </Avatar>
-                    }
-                  />
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid item xs={6}>
-                        <img src={selected.image} width="150" />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Grid container direction="column" spacing={1}>
-                          <Grid item>
-                            <Typography>{selected.title}</Typography>
-                          </Grid>
-                          <Grid item>
-                            <Typography variant="body1">
-                              {selected.description}
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid item>
-                        <audio controls>
-                          <source src={selected.audio} type="audio/mp3" />
-                        </audio>
-                      </Grid>
-                      {user.id === selected.user_id ? (
-                        <Grid item>
-                          <Button>edit</Button>
-                        </Grid>
-                      ) : null}
-                    </Grid>
-                  </CardContent>
-                </div>
+                <PostCardDisplay user={user} selected={selected} />
               </Card>
             </div>
           </InfoWindow>
