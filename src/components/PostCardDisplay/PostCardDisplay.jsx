@@ -34,7 +34,7 @@ function PostCardDisplay(props) {
         style={{ textAlign: "left" }}
         title={props.selected.username}
         avatar={
-          <Avatar>
+          <Avatar variant="square">
             {/* add navigation to profile page on click */}
             <Button onClick={onAvatar}>{props.selected.username[0]}</Button>
           </Avatar>
@@ -43,7 +43,11 @@ function PostCardDisplay(props) {
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <img src={props.selected.image} width="150" />
+            <Avatar
+              style={{ height: "200px", width: "150px" }}
+              variant="square"
+              src={props.selected.image}
+            />
           </Grid>
           <Grid item xs={6}>
             <Grid container direction="column" spacing={1}>

@@ -4,7 +4,18 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // styling
-import { Button, Card, Grid, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 // components
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch } from "react-redux";
@@ -30,15 +41,52 @@ function UserProfile() {
     history.push("/new");
   };
 
+  const editProfile = () => {};
+
   return (
     <div>
-      <h2>Welcome, {user.username}!</h2>
+      <Grid container justify="center">
+        <Grid item>
+          <Card style={{ maxWidth: "500px" }}>
+            <CardHeader title={`Welcome back,  ${user.username}`} />
+            <CardContent>
+              <Grid container spacing={2} justify="center">
+                <Grid item xs={6} align="right">
+                  <Avatar
+                    style={{ height: "190px", width: "190px" }}
+                    variant="square"
+                  >
+                    {user.username[0]}
+                  </Avatar>
+                </Grid>
+                <Grid item xs={6} align="left">
+                  <TextField
+                    variant="outlined"
+                    disabled
+                    defaultValue={user.about}
+                    multiline
+                    rows={8}
+                  />
+                </Grid>
+                <Grid item xs={12} display="flex" justify="center">
+                  <ButtonGroup fullWidth>
+                    <Button variant="outlined" onClick={newPost}>
+                      new post
+                    </Button>
+                    <Button variant="outlined" onClick={editProfile}>
+                      edit profile
+                    </Button>
+                  </ButtonGroup>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
       <p>View 3.0</p>
       <p>{JSON.stringify(user)}</p>
       <Typography variant="h4">YOUR POSTS</Typography>
-      <Button variant="outlined" onClick={newPost}>
-        New Post
-      </Button>
+
       <Grid container spacing={2}>
         {posts.map((post) => (
           <Grid item xs={4} key={post.id}>
