@@ -169,8 +169,6 @@ function EditPost() {
         <div style={{ padding: "20px", marginLeft: "5%", marginRight: "5%" }}>
           <Typography variant="h3">Edit Post</Typography>
           <p>View 3.1</p>
-          <p>{JSON.stringify(userData)}</p>
-          <p>{JSON.stringify(thisPost)}</p>
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <MapCreate

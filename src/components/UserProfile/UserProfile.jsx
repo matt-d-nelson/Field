@@ -34,13 +34,14 @@ function UserProfile() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>View 3.0</p>
+      <p>{JSON.stringify(user)}</p>
       <Typography variant="h4">YOUR POSTS</Typography>
       <Button variant="outlined" onClick={newPost}>
         New Post
       </Button>
       <Grid container spacing={2}>
         {posts.map((post) => (
-          <Grid item xs={4}>
+          <Grid item xs={4} key={post.id}>
             <Card>
               <PostCardDisplay user={user} selected={post} />
             </Card>
