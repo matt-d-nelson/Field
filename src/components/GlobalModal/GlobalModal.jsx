@@ -29,6 +29,13 @@ function GlobalModal(props) {
     }
   };
 
+  const onConfirm = () => {
+    dispatch(modalData.confirmDispatch);
+    if (modalData.history != undefined) {
+      history.push(modalData.history);
+    }
+  };
+
   //---------------------JSX RETURN---------------------//
   switch (modalData.type) {
     case "loading":
@@ -44,7 +51,7 @@ function GlobalModal(props) {
           <DialogTitle>Error</DialogTitle>
           <DialogContent>{modalData.message}</DialogContent>
           <DialogActions>
-            <Button onClick={onReturn}>Return</Button>
+            <Button onClick={onReturn}>return</Button>
           </DialogActions>
         </Dialog>
       );
@@ -54,7 +61,18 @@ function GlobalModal(props) {
           <DialogTitle>Success!</DialogTitle>
           <DialogContent>{modalData.message}</DialogContent>
           <DialogActions>
-            <Button onClick={onReturn}>Return</Button>
+            <Button onClick={onReturn}>return</Button>
+          </DialogActions>
+        </Dialog>
+      );
+    case "confirm":
+      return (
+        <Dialog open={modalData.open}>
+          <DialogTitle>Are you sure?</DialogTitle>
+          <DialogContent>{modalData.message}</DialogContent>
+          <DialogActions>
+            <Button onClick={onConfirm}>confirm</Button>
+            <Button onClick={onReturn}>cancel</Button>
           </DialogActions>
         </Dialog>
       );

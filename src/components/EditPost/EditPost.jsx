@@ -121,6 +121,18 @@ function EditPost() {
     }
   };
 
+  const onDelete = () => {
+    dispatch({
+      type: "OPEN_MODAL",
+      payload: {
+        open: true,
+        type: "confirm",
+        message: `Once deleted, ${thisPost.title} will be gone forever`,
+        confirmDispatch: { type: "DELETE_POST", payload: thisPostId.id },
+      },
+    });
+  };
+
   //---------------------HELPER FUNCTIONS---------------------//
   const verifyAudio = (audioToVerify) => {
     const splitAudio = audioToVerify.split(".");
@@ -224,6 +236,9 @@ function EditPost() {
             <Grid item xs={12}>
               <Button variant="outlined" onClick={onCancel}>
                 <Typography>cancel</Typography>
+              </Button>
+              <Button variant="outlined" onClick={onDelete}>
+                <Typography>delete</Typography>
               </Button>
               <Button variant="outlined" onClick={onUpdate}>
                 <Typography>update</Typography>

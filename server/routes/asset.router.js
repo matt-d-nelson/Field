@@ -93,6 +93,12 @@ router.put(
   }
 );
 
+// delete
+router.delete("/:id", (req, res) => {
+  console.log("DELETE", req.params.id);
+  res.send("ribbit");
+});
+
 //---------------------HELPER FUNCTIONS---------------------//
 
 function generateUpdateQuery(requestObject, requestFiles) {
