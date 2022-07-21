@@ -1,14 +1,31 @@
-import React from "react";
-import LogOutButton from "../LogOutButton/LogOutButton";
+//---------------------IMPORTS---------------------//
+// libraries
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+// styling
+import { Button, Card, Grid, Typography } from "@material-ui/core";
+// components
+import LogOutButton from "../LogOutButton/LogOutButton";
+import { useDispatch } from "react-redux";
+import PostCardDisplay from "../PostCardDisplay/PostCardDisplay";
 
 function UserProfile() {
+  //---------------------IMPORTED OBJECTS---------------------//
   const history = useHistory();
+  const dispatch = useDispatch();
 
+  //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
+  const posts = useSelector((store) => store.posts);
 
+  //---------------------ON MOUNT---------------------//
+  // get posts
+  useEffect(() => {
+    dispatch({ type: "GET_POSTS" });
+  }, []);
+
+  //---------------------EVENT HANDLERS---------------------//
   const newPost = () => {
     history.push("/new");
   };
@@ -16,12 +33,20 @@ function UserProfile() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <p>View 3.0 / flesh out with profile info and post details</p>
-      <p>Your ID is: {user.id}</p>
+      <p>View 3.0</p>
+      <Typography variant="h4">YOUR POSTS</Typography>
       <Button variant="outlined" onClick={newPost}>
         New Post
       </Button>
-      <LogOutButton className="btn" />
+      <Grid container spacing={2}>
+        {posts.map((post) => (
+          <Grid item xs={4}>
+            <Card>
+              <PostCardDisplay user={user} selected={post} />
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }

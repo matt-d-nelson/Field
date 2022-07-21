@@ -21,8 +21,9 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
 import Explore from "../Explore/Explore";
-import Details from "../Details/Details";
 import NewPost from "../NewPost/NewPost";
+import GlobalModal from "../GlobalModal/GlobalModal";
+import EditPost from "../EditPost/EditPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,10 @@ function App() {
   return (
     <Router>
       <div>
+        {/* ------------------GLOBAL COMPONENTS------------------ */}
         <Nav />
+        {/* alert modal that is controled by reducer */}
+        <GlobalModal />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -48,10 +52,6 @@ function App() {
           <Route exact path="/explore">
             <Explore />
           </Route>
-          {/* url param with id of the post details to load */}
-          <Route path="/details/:id">
-            <Details />
-          </Route>
 
           {/* ------------------PROTECTED ROUTES------------------ */}
           {/*logged in shows protected component else shows LoginPage */}
@@ -60,6 +60,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/new">
             <NewPost />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/edit/:id">
+            <EditPost />
           </ProtectedRoute>
 
           {/* ------------------VARIABLE ROUTES------------------ */}

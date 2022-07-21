@@ -32,13 +32,12 @@ UPDATE "user" SET image = 'test image', about = 'test about' WHERE id = 1;
 CREATE TABLE "post" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user" NOT NULL,
-	"lat" INT NOT NULL,
-	"lng" INT NOT NULL,
+	"lat" VARCHAR(120) NOT NULL,
+	"lng" VARCHAR(120) NOT NULL,
 	"title" VARCHAR(120) NOT NULL,
 	"description" TEXT,
 	"audio" VARCHAR(500) NOT NULL,
 	"image" VARCHAR(500),
-	"tags" TEXT
 );
 
 --DELETE TABLE
@@ -51,8 +50,8 @@ DELETE FROM "post";
 SELECT * FROM "post" ORDER BY id ASC;
 
 --CREATE NEW POST
-INSERT INTO "post" ("user_id", "lat", "lng", "title", "description", "audio", "image", "tags")
-VALUES (1, 1, 1, 'test title', 'test description', 'test audio', 'test image', 'test tags'); 
+INSERT INTO "post" ("user_id", "lat", "lng", "title", "description", "audio", "image")
+VALUES (1, 1, 1, 'test title', 'test description', 'test audio', 'test image'); 
 
 --UPDATE POST
 UPDATE "post" SET title = 'test new title' WHERE id = 1;
@@ -63,5 +62,11 @@ DELETE FROM "post" WHERE id = 1;
 --SELECT ALL POSTS FROM A SPECIFIC USER
 SELECT * FROM "post" WHERE user_id = 1;
 
---SELECT FROM ALL POSTS BY A SPECIFIC TAG
-SELECT * FROM "post" WHERE "tags" LIKE '%test%';
+--------------------------JOIN CALLS--------------------------
+
+SELECT 
+"user".username,  "user".image as profile_image, "user".about as profile_about,
+"post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+FROM "post"
+JOIN "user" ON "user".id = "post".user_id
+ORDER BY "post".id DESC;
