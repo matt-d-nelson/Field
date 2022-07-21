@@ -39,7 +39,7 @@ function MapCreate(props) {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(12);
   });
 
   const setMarkerLocation = (event) => {
@@ -56,7 +56,7 @@ function MapCreate(props) {
       <MapSearch panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
+        zoom={2}
         center={props.loc === undefined ? center : props.loc}
         options={options}
         onLoad={onMapLoad}

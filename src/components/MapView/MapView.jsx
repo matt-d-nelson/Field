@@ -75,6 +75,7 @@ function MapView() {
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(12);
   });
 
   // ensure map is loaded without error before returning
@@ -97,7 +98,7 @@ function MapView() {
       <Search panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
+        zoom={3}
         center={center}
         options={options}
         onLoad={onMapLoad}
