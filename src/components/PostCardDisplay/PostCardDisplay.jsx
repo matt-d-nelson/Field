@@ -20,7 +20,7 @@ function PostCardDisplay(props) {
   };
   const onAvatar = () => {
     //nav to profile
-    if ((props.user.id = props.selected.user_id)) {
+    if (props.user.id === props.selected.user_id) {
       history.push("/user");
     } else {
       console.log("navigate to forign profile");

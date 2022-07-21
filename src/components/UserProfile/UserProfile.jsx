@@ -31,7 +31,7 @@ function UserProfile() {
   };
 
   return (
-    <div className="container">
+    <div>
       <h2>Welcome, {user.username}!</h2>
       <p>View 3.0</p>
       <p>{JSON.stringify(user)}</p>
