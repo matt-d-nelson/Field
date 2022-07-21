@@ -102,15 +102,19 @@ router.put(
 
     updateQuery = generateUpdateQuery(req.body, req.files);
     console.log(updateQuery);
-    pool
-      .query(updateQuery.queryString, updateQuery.queryValues)
-      .then((result) => {
-        res.sendStatus(200);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.sendStatus(500);
-      });
+    if (req.user.id === Number(req.body.user_id)) {
+      pool
+        .query(updateQuery.queryString, updateQuery.queryValues)
+        .then((result) => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.sendStatus(403);
+    }
   }
 );
 

@@ -109,6 +109,7 @@ function EditPost() {
       // gather inputs as form data
       const newPost = new FormData();
       newPost.append("id", thisPost.id);
+      newPost.append("user_id", thisPost.user_id);
       newPost.append("title", title);
       newPost.append("description", description);
       newPost.append("lat", markers[0].lat);
