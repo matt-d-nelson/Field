@@ -128,7 +128,10 @@ function EditPost() {
         open: true,
         type: "confirm",
         message: `Once deleted, ${thisPost.title} will be gone forever`,
-        confirmDispatch: { type: "DELETE_POST", payload: thisPostId.id },
+        confirmDispatch: {
+          type: "DELETE_POST",
+          payload: { postId: thisPostId.id, userId: thisPost.user_id },
+        },
       },
     });
   };

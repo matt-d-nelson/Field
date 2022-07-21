@@ -115,21 +115,26 @@ router.put(
 );
 
 // delete
-router.delete("/:id", rejectUnauthenticated, (req, res) => {
-  console.log("DELETE", req.params.id);
+router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
+  console.log("DELETE", req.params.id, req.params.userid);
+  console.log(req.user.id);
 
   const deletePostId = [req.params.id];
   const deletePostQuery = `DELETE FROM "post" WHERE id = $1;`;
 
-  pool
-    .query(deletePostQuery, deletePostId)
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  if (req.user.id === Number(req.params.userid)) {
+    pool
+      .query(deletePostQuery, deletePostId)
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 //---------------------HELPER FUNCTIONS---------------------//
