@@ -47,6 +47,8 @@ function EditPost() {
   useEffect(() => {
     if (thisPost != undefined) {
       setMarkers([{ lat: Number(thisPost.lat), lng: Number(thisPost.lng) }]);
+      setTitle(thisPost.title);
+      setDescription(thisPost.description);
     }
   }, [thisPost]);
 
@@ -80,7 +82,7 @@ function EditPost() {
     history.push("/user");
   };
 
-  const onSubmit = () => {
+  const onUpdate = () => {
     // verify inputs
     if (verifyAudio(audioPath) || verifyPicture(picturePath)) {
       // open global modal with error message if bad input
@@ -172,7 +174,7 @@ function EditPost() {
                     variant="filled"
                     label="title"
                     fullWidth
-                    value={thisPost.title}
+                    value={title}
                     onChange={onTitleChange}
                   />
                 </Grid>
@@ -183,7 +185,7 @@ function EditPost() {
                     multiline
                     minRows={10}
                     fullWidth
-                    value={thisPost.description}
+                    value={description}
                     onChange={onDescriptionChange}
                   />
                 </Grid>
@@ -223,8 +225,8 @@ function EditPost() {
               <Button variant="outlined" onClick={onCancel}>
                 <Typography>cancel</Typography>
               </Button>
-              <Button variant="outlined" onClick={onSubmit}>
-                <Typography>submit</Typography>
+              <Button variant="outlined" onClick={onUpdate}>
+                <Typography>update</Typography>
               </Button>
             </Grid>
           </Grid>

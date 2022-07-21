@@ -2,7 +2,11 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 const upload = require("../modules/multer");
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
+//---------------------REQUESTS---------------------//
 // get
 router.get("/", (req, res) => {
   // GET route code here
@@ -67,14 +71,54 @@ router.post(
 // put
 router.put(
   "/",
+  rejectUnauthenticated,
   upload.fields([
     { name: "picture", maxCount: 1 },
     { name: "audio", maxCount: 1 },
   ]),
   (req, res) => {
     console.log(req.body);
-    res.send("ribbit");
+
+    updateQuery = generateUpdateQuery(req.body, req.files);
+    console.log(updateQuery);
+    pool
+      .query(updateQuery.queryString, updateQuery.queryValues)
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 );
+
+//---------------------HELPER FUNCTIONS---------------------//
+
+function generateUpdateQuery(requestObject, requestFiles) {
+  let queryValues = [
+    requestObject.title,
+    requestObject.description,
+    requestObject.lat,
+    requestObject.lng,
+  ];
+  let indexCount = 0;
+  let queryString = `UPDATE "post" SET title = $1, description = $2, lat = $3, lng = $4`;
+  if (requestObject.picture != "") {
+    queryValues.push(requestFiles.picture[0].path.slice(7));
+    queryString += `, image = $5`;
+    indexCount++;
+  }
+  if (requestObject.audio != "") {
+    queryValues.push(requestFiles.audio[0].path.slice(7));
+    queryString += `, audio = $${5 + indexCount}`;
+    indexCount++;
+  }
+
+  queryValues.push(requestObject.id);
+  queryString += ` WHERE id = $${5 + indexCount};`;
+
+  return { queryString: queryString, queryValues: queryValues };
+}
 
 module.exports = router;
