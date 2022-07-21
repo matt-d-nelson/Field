@@ -7,9 +7,8 @@ const {
 } = require("../modules/authentication-middleware");
 
 //---------------------REQUESTS---------------------//
-// get
+// get all posts
 router.get("/", (req, res) => {
-  // GET route code here
   getAllPostsQueryString = `SELECT 
                             "user".username,  "user".image as profile_image, "user".about as profile_about,
                             "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
@@ -19,6 +18,28 @@ router.get("/", (req, res) => {
 
   pool
     .query(getAllPostsQueryString)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// get all the posts of a specific user
+router.get("/user/:id", (req, res) => {
+  console.log("GET", req.params.id);
+  const getUserPostsValues = [req.params.id];
+  const getUserPostsQueryString = `SELECT 
+                            "user".username,  "user".image as profile_image, "user".about as profile_about,
+                            "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+                            FROM "post"
+                            JOIN "user" ON "user".id = "post".user_id
+                            WHERE "user".id = $1
+                            ORDER BY "post".id DESC;`;
+  pool
+    .query(getUserPostsQueryString, getUserPostsValues)
     .then((result) => {
       res.send(result.rows);
     })

@@ -22,7 +22,7 @@ function UserProfile() {
   //---------------------ON MOUNT---------------------//
   // get posts
   useEffect(() => {
-    dispatch({ type: "GET_POSTS" });
+    dispatch({ type: "GET_USER_POSTS", payload: user.id });
   }, []);
 
   //---------------------EVENT HANDLERS---------------------//
