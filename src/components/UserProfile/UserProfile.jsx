@@ -41,7 +41,9 @@ function UserProfile() {
     history.push("/new");
   };
 
-  const editProfile = () => {};
+  const editProfile = () => {
+    history.push(`/editprofile/${user.id}`);
+  };
 
   return (
     <div>
