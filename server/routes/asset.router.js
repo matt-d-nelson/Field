@@ -89,7 +89,7 @@ router.post(
   }
 );
 
-// put
+// put / update post
 router.put(
   "/",
   rejectUnauthenticated,
@@ -115,6 +115,35 @@ router.put(
     } else {
       res.sendStatus(403);
     }
+  }
+);
+
+// put / update profile
+router.put(
+  "/profile",
+  rejectUnauthenticated,
+  upload.single("picture"),
+  (req, res) => {
+    let queryString = "";
+    let queryValues = [];
+    // set query based on if a picture was uploaded
+    if (req.body.picture != "") {
+      queryString = `UPDATE "user" SET image = $1, about = $2 WHERE id = $3;`;
+      queryValues = [req.file.path.slice(7), req.body.about, req.body.id];
+    } else {
+      queryString = `UPDATE "user" SET about = $1 WHERE id = $2;`;
+      queryValues = [req.body.about, req.body.id];
+    }
+
+    pool
+      .query(queryString, queryValues)
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 );
 

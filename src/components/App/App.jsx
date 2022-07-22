@@ -65,7 +65,7 @@ function App() {
           <ProtectedRoute exact path="/edit/:id">
             <EditPost />
           </ProtectedRoute>
-          <ProtectedRoute exact path="/editprofile/:id">
+          <ProtectedRoute exact path="/editprofile">
             <EditProfile />
           </ProtectedRoute>
 

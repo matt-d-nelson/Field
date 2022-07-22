@@ -34,9 +34,12 @@ function PostCardDisplay(props) {
         style={{ textAlign: "left" }}
         title={props.selected.username}
         avatar={
-          <Avatar variant="square">
-            {/* add navigation to profile page on click */}
-            <Button onClick={onAvatar}>{props.selected.username[0]}</Button>
+          <Avatar
+            variant="square"
+            onClick={onAvatar}
+            src={props.selected.profile_image}
+          >
+            {props.selected.username[0]}
           </Avatar>
         }
       />
