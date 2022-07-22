@@ -15,7 +15,7 @@ function* deletePost(action) {
     yield delay(350);
     const res = yield axios({
       method: "delete",
-      url: `/api/asset/${action.payload}`,
+      url: `/api/asset/${action.payload.postId}/${action.payload.userId}`,
     });
     yield put({
       type: "OPEN_MODAL",

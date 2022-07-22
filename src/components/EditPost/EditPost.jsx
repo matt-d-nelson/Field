@@ -30,7 +30,7 @@ function EditPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
-  const [picturePath, setPicturePath] = useState("upload picture");
+  const [picturePath, setPicturePath] = useState("upload image");
   const [audio, setAudio] = useState("");
   const [audioPath, setAudioPath] = useState("upload audio");
   const [tags, setTags] = useState("");
@@ -97,7 +97,7 @@ function EditPost() {
       });
     } else {
       // temp for input verification
-      const newPostTemp = {
+      const updatedPostTemp = {
         user_id: userData.id,
         title: title,
         description: description,
@@ -105,19 +105,20 @@ function EditPost() {
         lat: markers[0].lat,
         lng: markers[0].lng,
       };
-      console.log(newPostTemp);
+      console.log(updatedPostTemp);
       // gather inputs as form data
-      const newPost = new FormData();
-      newPost.append("id", thisPost.id);
-      newPost.append("title", title);
-      newPost.append("description", description);
-      newPost.append("lat", markers[0].lat);
-      newPost.append("lng", markers[0].lng);
-      newPost.append("tags", tags);
-      newPost.append("picture", picture);
-      newPost.append("audio", audio);
-      // dispach POST request to saga
-      dispatch({ type: "UPDATE_POST", payload: newPost });
+      const updatedPost = new FormData();
+      updatedPost.append("id", thisPost.id);
+      updatedPost.append("user_id", thisPost.user_id);
+      updatedPost.append("title", title);
+      updatedPost.append("description", description);
+      updatedPost.append("lat", markers[0].lat);
+      updatedPost.append("lng", markers[0].lng);
+      updatedPost.append("tags", tags);
+      updatedPost.append("picture", picture);
+      updatedPost.append("audio", audio);
+      // dispach PUT request to saga
+      dispatch({ type: "UPDATE_POST", payload: updatedPost });
     }
   };
 
@@ -128,7 +129,10 @@ function EditPost() {
         open: true,
         type: "confirm",
         message: `Once deleted, ${thisPost.title} will be gone forever`,
-        confirmDispatch: { type: "DELETE_POST", payload: thisPostId.id },
+        confirmDispatch: {
+          type: "DELETE_POST",
+          payload: { postId: thisPostId.id, userId: thisPost.user_id },
+        },
       },
     });
   };
@@ -155,7 +159,7 @@ function EditPost() {
       fileExtension === "jpeg" ||
       fileExtension === "png" ||
       fileExtension === "gif" ||
-      fileExtension === "upload picture"
+      fileExtension === "upload image"
     ) {
       return false;
     }
@@ -169,8 +173,6 @@ function EditPost() {
         <div style={{ padding: "20px", marginLeft: "5%", marginRight: "5%" }}>
           <Typography variant="h3">Edit Post</Typography>
           <p>View 3.1</p>
-          <p>{JSON.stringify(userData)}</p>
-          <p>{JSON.stringify(thisPost)}</p>
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <MapCreate

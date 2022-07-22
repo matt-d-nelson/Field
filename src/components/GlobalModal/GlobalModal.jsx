@@ -27,6 +27,9 @@ function GlobalModal(props) {
     if (modalData.history != undefined) {
       history.push(modalData.history);
     }
+    if (modalData.confirmDispatch != undefined) {
+      dispatch(modalData.confirmDispatch);
+    }
   };
 
   const onConfirm = () => {

@@ -20,7 +20,7 @@ function PostCardDisplay(props) {
   };
   const onAvatar = () => {
     //nav to profile
-    if ((props.user.id = props.selected.user_id)) {
+    if (props.user.id === props.selected.user_id) {
       history.push("/user");
     } else {
       console.log("navigate to forign profile");
@@ -34,16 +34,23 @@ function PostCardDisplay(props) {
         style={{ textAlign: "left" }}
         title={props.selected.username}
         avatar={
-          <Avatar>
-            {/* add navigation to profile page on click */}
-            <Button onClick={onAvatar}>{props.selected.username[0]}</Button>
+          <Avatar
+            variant="square"
+            onClick={onAvatar}
+            src={props.selected.profile_image}
+          >
+            {props.selected.username[0]}
           </Avatar>
         }
       />
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <img src={props.selected.image} width="150" />
+            <Avatar
+              style={{ height: "200px", width: "150px" }}
+              variant="square"
+              src={props.selected.image}
+            />
           </Grid>
           <Grid item xs={6}>
             <Grid container direction="column" spacing={1}>

@@ -24,6 +24,7 @@ import Explore from "../Explore/Explore";
 import NewPost from "../NewPost/NewPost";
 import GlobalModal from "../GlobalModal/GlobalModal";
 import EditPost from "../EditPost/EditPost";
+import EditProfile from "../EditProfile/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/edit/:id">
             <EditPost />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/editprofile">
+            <EditProfile />
           </ProtectedRoute>
 
           {/* ------------------VARIABLE ROUTES------------------ */}

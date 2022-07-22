@@ -1,8 +1,8 @@
-import { Typography } from "@material-ui/core";
-
+//---------------------IMPORTS---------------------//
+// libraries
+import { useCallback, useEffect, useRef, useState } from "react";
+// components
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useCallback, useRef } from "react";
-
 import libraries from "../MapLibraries/MapLibraries";
 import MapSearch from "../MapSearch/MapSearch";
 
@@ -12,12 +12,6 @@ const mapContainerStyle = {
   //   width: "400px",
   //   height: "300px",
 };
-// lat lng where map is centered
-const center = {
-  // latitude and longitude
-  lat: 45.56477,
-  lng: -94.317886,
-};
 
 const options = {
   disableDefaultUI: true,
@@ -25,6 +19,22 @@ const options = {
 };
 
 function MapCreate(props) {
+  //---------------------LOCAL STATE---------------------//
+
+  const [center, setCenter] = useState({
+    // latitude and longitude
+    lat: 45.56477,
+    lng: -94.317886,
+  });
+
+  //---------------------USE EFFECT---------------------//
+  useEffect(() => {
+    if (props.loc != undefined) {
+      setCenter(props.loc);
+    }
+  }, []);
+
+  //---------------------GOOGLE MAP SETUP---------------------//
   // load the g map
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -57,7 +67,7 @@ function MapCreate(props) {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={2}
-        center={props.loc === undefined ? center : props.loc}
+        center={center}
         options={options}
         onLoad={onMapLoad}
         onClick={setMarkerLocation}

@@ -28,7 +28,7 @@ function NewPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
-  const [picturePath, setPicturePath] = useState("upload picture");
+  const [picturePath, setPicturePath] = useState("upload image");
   const [audio, setAudio] = useState("");
   const [audioPath, setAudioPath] = useState("upload audio");
   const [tags, setTags] = useState("");
@@ -137,7 +137,7 @@ function NewPost() {
   return (
     <div style={{ padding: "20px", marginLeft: "5%", marginRight: "5%" }}>
       <Typography variant="h3">New Post</Typography>
-      <p>View 3.2 / add form components to create a new post</p>
+      <p>View 3.2</p>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <MapCreate setMarkers={setMarkers} markers={markers} />

@@ -7,9 +7,8 @@ const {
 } = require("../modules/authentication-middleware");
 
 //---------------------REQUESTS---------------------//
-// get
+// get all posts
 router.get("/", (req, res) => {
-  // GET route code here
   getAllPostsQueryString = `SELECT 
                             "user".username,  "user".image as profile_image, "user".about as profile_about,
                             "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
@@ -19,6 +18,28 @@ router.get("/", (req, res) => {
 
   pool
     .query(getAllPostsQueryString)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// get all the posts of a specific user
+router.get("/user/:id", (req, res) => {
+  console.log("GET", req.params.id);
+  const getUserPostsValues = [req.params.id];
+  const getUserPostsQueryString = `SELECT 
+                            "user".username,  "user".image as profile_image, "user".about as profile_about,
+                            "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+                            FROM "post"
+                            JOIN "user" ON "user".id = "post".user_id
+                            WHERE "user".id = $1
+                            ORDER BY "post".id DESC;`;
+  pool
+    .query(getUserPostsQueryString, getUserPostsValues)
     .then((result) => {
       res.send(result.rows);
     })
@@ -68,7 +89,7 @@ router.post(
   }
 );
 
-// put
+// put / update post
 router.put(
   "/",
   rejectUnauthenticated,
@@ -81,8 +102,41 @@ router.put(
 
     updateQuery = generateUpdateQuery(req.body, req.files);
     console.log(updateQuery);
+    if (req.user.id === Number(req.body.user_id)) {
+      pool
+        .query(updateQuery.queryString, updateQuery.queryValues)
+        .then((result) => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.sendStatus(403);
+    }
+  }
+);
+
+// put / update profile
+router.put(
+  "/profile",
+  rejectUnauthenticated,
+  upload.single("picture"),
+  (req, res) => {
+    let queryString = "";
+    let queryValues = [];
+    // set query based on if a picture was uploaded
+    if (req.body.picture != "") {
+      queryString = `UPDATE "user" SET image = $1, about = $2 WHERE id = $3;`;
+      queryValues = [req.file.path.slice(7), req.body.about, req.body.id];
+    } else {
+      queryString = `UPDATE "user" SET about = $1 WHERE id = $2;`;
+      queryValues = [req.body.about, req.body.id];
+    }
+
     pool
-      .query(updateQuery.queryString, updateQuery.queryValues)
+      .query(queryString, queryValues)
       .then((result) => {
         res.sendStatus(200);
       })
@@ -94,21 +148,26 @@ router.put(
 );
 
 // delete
-router.delete("/:id", rejectUnauthenticated, (req, res) => {
-  console.log("DELETE", req.params.id);
+router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
+  console.log("DELETE", req.params.id, req.params.userid);
+  console.log(req.user.id);
 
   const deletePostId = [req.params.id];
   const deletePostQuery = `DELETE FROM "post" WHERE id = $1;`;
 
-  pool
-    .query(deletePostQuery, deletePostId)
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  if (req.user.id === Number(req.params.userid)) {
+    pool
+      .query(deletePostQuery, deletePostId)
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 //---------------------HELPER FUNCTIONS---------------------//
