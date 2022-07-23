@@ -7,6 +7,7 @@ const {
 } = require("../modules/authentication-middleware");
 
 //---------------------REQUESTS---------------------//
+//--------GET--------//
 // get all posts
 router.get("/", (req, res) => {
   getAllPostsQueryString = `SELECT 
@@ -51,9 +52,23 @@ router.get("/user/:id", (req, res) => {
 
 // get all the posts of users that the logged in user is following
 router.get("/followed", (req, res) => {
-  res.send("ribbit");
+  const getFollowedPostsQueryValues = [req.user.id];
+  const getFollowedPostsQueryString = `SELECT * FROM "follower"
+                      JOIN "post" ON "post".user_id = "follower".followed_user_id
+                      WHERE "follower".following_user_id = $1;`;
+
+  pool
+    .query(getFollowedPostsQueryString, getFollowedPostsQueryValues)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
+//--------POST--------//
 // post
 router.post(
   "/",
@@ -94,6 +109,7 @@ router.post(
   }
 );
 
+//--------PUT--------//
 // put / update post
 router.put(
   "/",
@@ -152,6 +168,7 @@ router.put(
   }
 );
 
+//--------DELETE--------//
 // delete
 router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
   console.log("DELETE", req.params.id, req.params.userid);
