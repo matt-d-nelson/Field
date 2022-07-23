@@ -167,7 +167,27 @@ router.put(
 // put / update followed user
 router.put("/followed", (req, res) => {
   console.log(req.body);
-  res.send("ribbit follow");
+  // [the currently logged in user, the user whose followed status is being updated]
+  const followUserValues = [req.user.id, req.body.idToFollow];
+  let followUserQueryString = ``;
+  // if the user is following this user
+  if (req.body.following) {
+    // add row into follower table
+    followUserQueryString = `INSERT INTO "follower" ("following_user_id", "followed_user_id")
+                            VALUES ($1,$2);`;
+  } else {
+    // remove row from follower table
+    followUserQueryString = `DELETE FROM "follower" WHERE following_user_id = $1 AND followed_user_id = $2;`;
+  }
+  pool
+    .query(followUserQueryString, followUserValues)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 //--------DELETE--------//
