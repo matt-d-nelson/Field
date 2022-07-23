@@ -25,6 +25,7 @@ import NewPost from "../NewPost/NewPost";
 import GlobalModal from "../GlobalModal/GlobalModal";
 import EditPost from "../EditPost/EditPost";
 import EditProfile from "../EditProfile/EditProfile";
+import ForeignUserProfile from "../ForeignUserProfile/ForeignUserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route exact path="/explore">
             <Explore />
+          </Route>
+          <Route exact path="/foreign/:id">
+            <ForeignUserProfile />
           </Route>
 
           {/* ------------------PROTECTED ROUTES------------------ */}

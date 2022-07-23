@@ -7,6 +7,7 @@ const {
 } = require("../modules/authentication-middleware");
 
 //---------------------REQUESTS---------------------//
+//--------GET--------//
 // get all posts
 router.get("/", (req, res) => {
   getAllPostsQueryString = `SELECT 
@@ -26,7 +27,6 @@ router.get("/", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // get all the posts of a specific user
 router.get("/user/:id", (req, res) => {
   console.log("GET", req.params.id);
@@ -48,8 +48,31 @@ router.get("/user/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
+// get all the posts of users that the logged in user is following
+router.get("/followed", (req, res) => {
+  const getFollowedPostsQueryValues = [req.user.id];
+  const getFollowedPostsQueryString = `SELECT  
+                                      "follower".followed_user_id,
+                                      "user".username,  "user".image as profile_image, "user".about as profile_about,
+                                      "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image  
+                                      FROM "follower"
+                                      JOIN "post" ON "post".user_id = "follower".followed_user_id
+                                      JOIN "user" ON "user".id = "post".user_id
+                                      WHERE "follower".following_user_id = $1;`;
 
-// post
+  pool
+    .query(getFollowedPostsQueryString, getFollowedPostsQueryValues)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+//--------POST--------//
+// post / post post (lol)
 router.post(
   "/",
   upload.fields([
@@ -89,6 +112,7 @@ router.post(
   }
 );
 
+//--------PUT--------//
 // put / update post
 router.put(
   "/",
@@ -117,7 +141,6 @@ router.put(
     }
   }
 );
-
 // put / update profile
 router.put(
   "/profile",
@@ -146,8 +169,34 @@ router.put(
       });
   }
 );
+// put / update followed user
+router.put("/followed", (req, res) => {
+  console.log(req.body);
+  // [the currently logged in user, the user whose followed status is being updated]
+  const followUserValues = [req.user.id, req.body.idToFollow];
+  let followUserQueryString = ``;
+  // if the user is following this user
+  if (req.body.following) {
+    // add row into follower table
+    followUserQueryString = `INSERT INTO "follower" ("following_user_id", "followed_user_id")
+                            VALUES ($1,$2);`;
+  } else {
+    // remove row from follower table
+    followUserQueryString = `DELETE FROM "follower" WHERE following_user_id = $1 AND followed_user_id = $2;`;
+  }
+  pool
+    .query(followUserQueryString, followUserValues)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
-// delete
+//--------DELETE--------//
+// delete post
 router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
   console.log("DELETE", req.params.id, req.params.userid);
   console.log(req.user.id);
