@@ -67,7 +67,7 @@ router.get("/followed", (req, res) => {
 });
 
 //--------POST--------//
-// post
+// post / post post (lol)
 router.post(
   "/",
   upload.fields([
@@ -164,9 +164,14 @@ router.put(
       });
   }
 );
+// put / update followed user
+router.put("/followed", (req, res) => {
+  console.log(req.body);
+  res.send("ribbit follow");
+});
 
 //--------DELETE--------//
-// delete
+// delete post
 router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
   console.log("DELETE", req.params.id, req.params.userid);
   console.log(req.user.id);

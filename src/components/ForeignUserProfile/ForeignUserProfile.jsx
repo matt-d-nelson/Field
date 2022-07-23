@@ -44,6 +44,17 @@ function ForeignUserProfile() {
 
   const onFollow = () => {
     // dispatch put saga to add follow to junction table
+    dispatch({
+      type: "UPDATE_FOLLOWING",
+      payload: { idToFollow: thisUserId.id, following: true },
+    });
+  };
+
+  const onUnfollow = () => {
+    dispatch({
+      type: "UPDATE_FOLLOWING",
+      payload: { idToFollow: thisUserId.id, following: false },
+    });
   };
 
   //---------------------JSX RETURN---------------------//
@@ -51,7 +62,6 @@ function ForeignUserProfile() {
     <div>
       <Typography variant="h3">Foreign User Profile</Typography>
       <p>View 2.3 User ID: {thisUserId.id}</p>
-      <p>{JSON.stringify(followedPosts)}</p>
       {posts.length > 0 ? (
         <div>
           <Grid container justifyContent="center">
@@ -84,9 +94,20 @@ function ForeignUserProfile() {
                         <Button variant="outlined" onClick={onReturn}>
                           return
                         </Button>
-                        <Button variant="outlined" onClick={onFollow}>
-                          follow
-                        </Button>
+                        {/* conditional render to check if the logged in user is following this user profile */}
+                        {followedPosts.filter(
+                          (post) =>
+                            Number(post.followed_user_id) ===
+                            Number(thisUserId.id)
+                        ).length > 0 ? (
+                          <Button variant="outlined" onClick={onUnfollow}>
+                            unfollow
+                          </Button>
+                        ) : (
+                          <Button variant="outlined" onClick={onFollow}>
+                            follow
+                          </Button>
+                        )}
                       </ButtonGroup>
                     </Grid>
                   </Grid>
