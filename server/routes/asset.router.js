@@ -49,6 +49,11 @@ router.get("/user/:id", (req, res) => {
     });
 });
 
+// get all the posts of users that the logged in user is following
+router.get("/followed", (req, res) => {
+  res.send("ribbit");
+});
+
 // post
 router.post(
   "/",

@@ -34,6 +34,7 @@ function ForeignUserProfile() {
   //---------------------ON MOUNT---------------------//
   useEffect(() => {
     dispatch({ type: "GET_USER_POSTS", payload: thisUserId.id });
+    dispatch({ type: "GET_FOLLOWED_USER_POSTS" });
   }, []);
 
   const onReturn = () => {
