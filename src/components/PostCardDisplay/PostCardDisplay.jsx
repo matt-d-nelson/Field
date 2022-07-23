@@ -19,11 +19,13 @@ function PostCardDisplay(props) {
     history.push(`/edit/${props.selected.id}`);
   };
   const onAvatar = () => {
-    //nav to profile
+    // if the post creater is the same as the logged in user
     if (props.user.id === props.selected.user_id) {
+      // nav to their profile
       history.push("/user");
     } else {
-      console.log("navigate to forign profile");
+      // nav to the foreign profile of the creator
+      history.push(`/foreign/${props.selected.user_id}`);
     }
   };
 
