@@ -27,6 +27,7 @@ function ForeignUserProfile() {
   //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
   const posts = useSelector((store) => store.posts);
+  const followedPosts = useSelector((store) => store.followedPosts);
 
   //---------------------LOCAL STATE---------------------//
   const thisUserId = useParams();
@@ -50,6 +51,7 @@ function ForeignUserProfile() {
     <div>
       <Typography variant="h3">Foreign User Profile</Typography>
       <p>View 2.3 User ID: {thisUserId.id}</p>
+      <p>{JSON.stringify(followedPosts)}</p>
       {posts.length > 0 ? (
         <div>
           <Grid container justifyContent="center">

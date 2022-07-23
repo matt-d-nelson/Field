@@ -3,6 +3,7 @@ import errors from "./errors.reducer";
 import user from "./user.reducer";
 import modal from "./modal.reducer";
 import posts from "./posts.reducer";
+import followedPosts from "./followedPosts.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -13,8 +14,9 @@ import posts from "./posts.reducer";
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  modal,
-  posts,
+  modal, // creates a globally rendered dialog popup
+  posts, // contains all posts or all posts of a specific user
+  followedPosts, // contains all posts of users that the currently logged in user is following
 });
 
 export default rootReducer;

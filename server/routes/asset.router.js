@@ -27,7 +27,6 @@ router.get("/", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // get all the posts of a specific user
 router.get("/user/:id", (req, res) => {
   console.log("GET", req.params.id);
@@ -49,7 +48,6 @@ router.get("/user/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 // get all the posts of users that the logged in user is following
 router.get("/followed", (req, res) => {
   const getFollowedPostsQueryValues = [req.user.id];
@@ -138,7 +136,6 @@ router.put(
     }
   }
 );
-
 // put / update profile
 router.put(
   "/profile",

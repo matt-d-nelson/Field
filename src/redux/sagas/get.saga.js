@@ -43,8 +43,8 @@ function* getUserPosts(action) {
 function* getFollowedUserPosts() {
   try {
     const posts = yield axios.get(`/api/asset/followed`);
-    console.log(posts);
     // put res into new reducer
+    yield put({ type: "SET_FOLLOWED_POSTS", payload: posts.data });
   } catch (err) {
     console.log(err);
     yield put({
