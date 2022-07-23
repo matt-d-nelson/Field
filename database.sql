@@ -62,6 +62,28 @@ DELETE FROM "post" WHERE id = 1;
 --SELECT ALL POSTS FROM A SPECIFIC USER
 SELECT * FROM "post" WHERE user_id = 1;
 
+--------------------------FOLLOWER TABLE--------------------------
+CREATE TABLE "follower" (
+	"id" SERIAL PRIMARY KEY,
+	"following_user_id" INT REFERENCES "user" NOT NULL,
+	"followed_user_id" INT REFERENCES "user" NOT NULL
+);
+
+--SELECT ALL ROWS FROM TABLE
+SELECT * FROM "follower" ORDER BY id ASC;
+
+--FOLLOWER USER
+INSERT INTO "follower" ("following_user_id", "followed_user_id")
+VALUES (5,3);
+
+--UNFOLLOW USER
+DELETE FROM "follower" WHERE following_user_id = 5 AND followed_user_id = 3;
+
+--GET ALL POSTS OF FOLLOWED USERS
+SELECT * FROM "follower"
+JOIN "post" ON "post".user_id = "follower".followed_user_id
+WHERE "follower".following_user_id = 5;
+
 --------------------------JOIN CALLS--------------------------
 
 SELECT 
