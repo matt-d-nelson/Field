@@ -105,7 +105,7 @@ function* updateFollowing(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your feed has been updated",
+        message: "Your feed has been updated.",
       },
     });
     yield put({ type: "GET_FOLLOWED_USER_POSTS" });

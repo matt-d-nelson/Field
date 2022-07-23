@@ -51,9 +51,14 @@ router.get("/user/:id", (req, res) => {
 // get all the posts of users that the logged in user is following
 router.get("/followed", (req, res) => {
   const getFollowedPostsQueryValues = [req.user.id];
-  const getFollowedPostsQueryString = `SELECT * FROM "follower"
-                      JOIN "post" ON "post".user_id = "follower".followed_user_id
-                      WHERE "follower".following_user_id = $1;`;
+  const getFollowedPostsQueryString = `SELECT  
+                                      "follower".followed_user_id,
+                                      "user".username,  "user".image as profile_image, "user".about as profile_about,
+                                      "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image  
+                                      FROM "follower"
+                                      JOIN "post" ON "post".user_id = "follower".followed_user_id
+                                      JOIN "user" ON "user".id = "post".user_id
+                                      WHERE "follower".following_user_id = $1;`;
 
   pool
     .query(getFollowedPostsQueryString, getFollowedPostsQueryValues)

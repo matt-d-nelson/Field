@@ -80,8 +80,13 @@ VALUES (5,3);
 DELETE FROM "follower" WHERE following_user_id = 5 AND followed_user_id = 3;
 
 --GET ALL POSTS OF FOLLOWED USERS
-SELECT * FROM "follower"
+SELECT  
+"follower".followed_user_id,
+"user".username,  "user".image as profile_image, "user".about as profile_about,
+"post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image  
+FROM "follower"
 JOIN "post" ON "post".user_id = "follower".followed_user_id
+JOIN "user" ON "user".id = "post".user_id
 WHERE "follower".following_user_id = 5;
 
 --------------------------JOIN CALLS--------------------------

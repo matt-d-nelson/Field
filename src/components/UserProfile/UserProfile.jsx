@@ -1,7 +1,7 @@
 //---------------------IMPORTS---------------------//
 // libraries
 import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // styling
@@ -27,11 +27,16 @@ function UserProfile() {
   //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
   const posts = useSelector((store) => store.posts);
+  const followedPosts = useSelector((store) => store.followedPosts);
+
+  //---------------------LOCAL STATE---------------------//
+  const [yourPosts, setYourPosts] = useState(true);
 
   //---------------------ON MOUNT---------------------//
   // get posts
   useEffect(() => {
     dispatch({ type: "GET_USER_POSTS", payload: user.id });
+    dispatch({ type: "GET_FOLLOWED_USER_POSTS" });
   }, []);
 
   //---------------------EVENT HANDLERS---------------------//
@@ -41,6 +46,14 @@ function UserProfile() {
 
   const editProfile = () => {
     history.push(`/editprofile`);
+  };
+
+  const onYourPosts = () => {
+    setYourPosts(true);
+  };
+
+  const onYourFeed = () => {
+    setYourPosts(false);
   };
 
   //---------------------JSX RETURN---------------------//
@@ -87,17 +100,36 @@ function UserProfile() {
           </Card>
         </Grid>
       </Grid>
-      <Typography variant="h4">YOUR POSTS</Typography>
+      <ButtonGroup>
+        <Button variant="outlined" onClick={onYourPosts}>
+          your posts
+        </Button>
+        <Button variant="outlined" onClick={onYourFeed}>
+          your feed
+        </Button>
+      </ButtonGroup>
 
-      <Grid container spacing={2}>
-        {posts.map((post) => (
-          <Grid item xs={4} key={post.id}>
-            <Card>
-              <PostCardDisplay user={user} selected={post} />
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      {yourPosts ? (
+        <Grid container spacing={2}>
+          {posts.map((post) => (
+            <Grid item xs={4} key={post.id}>
+              <Card>
+                <PostCardDisplay user={user} selected={post} />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Grid container spacing={2}>
+          {followedPosts.map((post) => (
+            <Grid item xs={4} key={post.id}>
+              <Card>
+                <PostCardDisplay user={user} selected={post} />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </div>
   );
 }
