@@ -1,5 +1,6 @@
 //---------------------IMPORTS---------------------//
 // libraries
+import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -16,7 +17,6 @@ import {
   Typography,
 } from "@material-ui/core";
 // components
-import { useDispatch } from "react-redux";
 import PostCardDisplay from "../PostCardDisplay/PostCardDisplay";
 
 function UserProfile() {
@@ -43,6 +43,7 @@ function UserProfile() {
     history.push(`/editprofile`);
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
     <div>
       <p>View 3.0</p>
