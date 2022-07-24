@@ -35,7 +35,11 @@ function ForeignUserProfile() {
   //---------------------ON MOUNT---------------------//
   useEffect(() => {
     dispatch({ type: "GET_USER_POSTS", payload: thisUserId.id });
-    dispatch({ type: "GET_FOLLOWED_USER_POSTS" });
+    // if a user is logged in
+    if (user.id) {
+      // load followed table to conditionally render follow/unfollow button
+      dispatch({ type: "GET_FOLLOWED_USER_POSTS" });
+    }
   }, []);
 
   const onReturn = () => {
@@ -43,11 +47,24 @@ function ForeignUserProfile() {
   };
 
   const onFollow = () => {
-    // dispatch put saga to add follow to junction table
-    dispatch({
-      type: "UPDATE_FOLLOWING",
-      payload: { idToFollow: thisUserId.id, following: true },
-    });
+    // if a user is logged in
+    if (user.id) {
+      // dispatch put saga to add follow to junction table
+      dispatch({
+        type: "UPDATE_FOLLOWING",
+        payload: { idToFollow: thisUserId.id, following: true },
+      });
+    } else {
+      // dispatch an error message telling them to log in
+      dispatch({
+        type: "OPEN_MODAL",
+        payload: {
+          open: true,
+          type: "error",
+          message: `Please log in or create an accout to follow ${posts[0].username}`,
+        },
+      });
+    }
   };
 
   const onUnfollow = () => {

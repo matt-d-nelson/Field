@@ -25,6 +25,7 @@ import {
 import libraries from "../MapLibraries/MapLibraries";
 import Search from "../MapSearch/MapSearch";
 import PostCardDisplay from "../PostCardDisplay/PostCardDisplay";
+import FilterPosts from "../FilterPosts/FilterPosts";
 
 //-------------------------------------- map container style as needed
 const mapContainerStyle = {
@@ -93,6 +94,7 @@ function MapView() {
   //---------------------JSX RETURN---------------------//
   return (
     <div>
+      <FilterPosts />
       <Search panTo={panTo} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}

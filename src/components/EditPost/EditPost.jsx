@@ -23,6 +23,7 @@ function EditPost() {
   //---------------------REDUCER STATE---------------------//
   const userData = useSelector((store) => store.user);
   const posts = useSelector((store) => store.posts);
+  const postTags = useSelector((store) => store.tags);
 
   //---------------------LOCAL STATE---------------------//
   // use state
@@ -42,8 +43,9 @@ function EditPost() {
   // get posts
   useEffect(() => {
     dispatch({ type: "GET_POSTS" });
+    dispatch({ type: "GET_POST_TAGS", payload: thisPostId.id });
   }, []);
-
+  // update text fields if thisPost is loaded
   useEffect(() => {
     if (thisPost != undefined) {
       setMarkers([{ lat: Number(thisPost.lat), lng: Number(thisPost.lng) }]);
@@ -51,6 +53,14 @@ function EditPost() {
       setDescription(thisPost.description);
     }
   }, [thisPost]);
+  // update tags text field if postTags is loaded
+  useEffect(() => {
+    if (postTags.length > 0) {
+      setTags(stringifyTags(postTags));
+    } else {
+      setTags("");
+    }
+  }, [postTags]);
 
   //---------------------EVENT HANDLERS---------------------//
   const onTitleChange = (event) => {
@@ -166,6 +176,16 @@ function EditPost() {
     return true;
   };
 
+  const stringifyTags = (tagsToStringify) => {
+    let returnArray = [];
+    // loop through tags
+    for (let i = 0; i < tagsToStringify.length; i++) {
+      // push each of them to the return array
+      returnArray.push(tagsToStringify[i].tag_name);
+    }
+    // join the return array and return the resulting string
+    return returnArray.join(", ");
+  };
   //---------------------JSX RETURN---------------------//
   return (
     <div>
@@ -208,6 +228,7 @@ function EditPost() {
                     variant="filled"
                     label="tags"
                     fullWidth
+                    value={tags}
                     onChange={onTagsChange}
                   />
                 </Grid>

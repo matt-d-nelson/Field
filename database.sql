@@ -79,6 +79,41 @@ VALUES (5,3);
 --UNFOLLOW USER
 DELETE FROM "follower" WHERE following_user_id = 5 AND followed_user_id = 3;
 
+--------------------------TAG TABLE--------------------------
+CREATE TABLE "tag" (
+	"id" SERIAL PRIMARY KEY,
+	"post_id" INT REFERENCES "post" NOT NULL,
+	"tag_name"  VARCHAR(120) NOT NULL
+);
+
+--DELETE TABLE
+DROP TABLE "tag";
+
+--SELECT ALL ROWS FROM TABLE
+SELECT * FROM "tag" ORDER BY id ASC;
+
+--REMOVE ALL TAGS FROM A POST
+DELETE FROM "tag" WHERE "tag".post_id = 3;
+
+--INSERT TAG
+INSERT INTO "tag" ("post_id", "tag_name")
+VALUES (3,'test2'),(3, 'test3');
+
+--GET POSTS BASED ON TAG
+SELECT
+"user".username,  "user".image as profile_image, "user".about as profile_about,
+"post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+FROM "post"
+JOIN "user" ON "user".id = "post".user_id
+JOIN "tag" ON "tag".post_id = "post".id
+WHERE "tag".tag_name = 'test2';
+
+--GET ALL TAGS FOR A SPECIFIC POST
+SELECT "tag".tag_name
+FROM "tag"
+WHERE "tag".post_id = 3;
+
+--------------------------JOIN CALLS--------------------------
 --GET ALL POSTS OF FOLLOWED USERS
 SELECT  
 "follower".followed_user_id,
@@ -89,8 +124,7 @@ JOIN "post" ON "post".user_id = "follower".followed_user_id
 JOIN "user" ON "user".id = "post".user_id
 WHERE "follower".following_user_id = 5;
 
---------------------------JOIN CALLS--------------------------
-
+--GET ALL POSTS
 SELECT 
 "user".username,  "user".image as profile_image, "user".about as profile_about,
 "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image

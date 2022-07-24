@@ -10,7 +10,6 @@ function LogOutButton(props) {
   const onLogout = () => {
     dispatch({ type: "LOGOUT" });
     dispatch({ type: "SET_POSTS", payload: [] });
-    history.push("/login");
   };
 
   return (
