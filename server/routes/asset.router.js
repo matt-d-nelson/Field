@@ -58,7 +58,8 @@ router.get("/followed", (req, res) => {
                                       FROM "follower"
                                       JOIN "post" ON "post".user_id = "follower".followed_user_id
                                       JOIN "user" ON "user".id = "post".user_id
-                                      WHERE "follower".following_user_id = $1;`;
+                                      WHERE "follower".following_user_id = $1
+                                      ORDER BY "post".id DESC;`;
 
   pool
     .query(getFollowedPostsQueryString, getFollowedPostsQueryValues)
