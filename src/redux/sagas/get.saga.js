@@ -57,11 +57,30 @@ function* getFollowedUserPosts() {
     });
   }
 }
+// get all the posts that match the input tag
+function* getFilteredPosts(action) {
+  try {
+    const posts = yield axios.get(`/api/asset/filtered/${action.payload}`);
+    console.log(posts);
+    // yield put({ type: "SET_POSTS", payload: posts.data });
+  } catch (err) {
+    console.log(err);
+    yield put({
+      type: "OPEN_MODAL",
+      payload: {
+        open: true,
+        type: "error",
+        message: "We are unable filter posts",
+      },
+    });
+  }
+}
 
 function* getSaga() {
   yield takeLatest("GET_POSTS", getPosts);
   yield takeLatest("GET_USER_POSTS", getUserPosts);
   yield takeLatest("GET_FOLLOWED_USER_POSTS", getFollowedUserPosts);
+  yield takeLatest("GET_FILTERED_POSTS", getFilteredPosts);
 }
 
 export default getSaga;

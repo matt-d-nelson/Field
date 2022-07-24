@@ -71,6 +71,11 @@ router.get("/followed", (req, res) => {
       res.sendStatus(500);
     });
 });
+// get all the posts that have a specific tag
+router.get("/filtered/:tag", (req, res) => {
+  console.log(req.params.tag);
+  res.send("ribbit");
+});
 
 //--------POST--------//
 // post / post new post (lol)
