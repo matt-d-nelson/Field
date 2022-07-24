@@ -42,6 +42,7 @@ function EditPost() {
   // get posts
   useEffect(() => {
     dispatch({ type: "GET_POSTS" });
+    dispatch({ type: "GET_POST_TAGS", payload: thisPostId.id });
   }, []);
 
   useEffect(() => {

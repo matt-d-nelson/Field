@@ -88,12 +88,30 @@ function* getFilteredPosts(action) {
     });
   }
 }
+// get all the tags for a specific post
+function* getPostTags(action) {
+  try {
+    const tags = yield axios.get(`/api/asset/tags/${action.payload}`);
+    console.log("GET TAGS", tags);
+  } catch (err) {
+    console.log(err);
+    yield put({
+      type: "OPEN_MODAL",
+      payload: {
+        open: true,
+        type: "error",
+        message: "We are unable load this post's tags.",
+      },
+    });
+  }
+}
 
 function* getSaga() {
   yield takeLatest("GET_POSTS", getPosts);
   yield takeLatest("GET_USER_POSTS", getUserPosts);
   yield takeLatest("GET_FOLLOWED_USER_POSTS", getFollowedUserPosts);
   yield takeLatest("GET_FILTERED_POSTS", getFilteredPosts);
+  yield takeLatest("GET_POST_TAGS", getPostTags);
 }
 
 export default getSaga;

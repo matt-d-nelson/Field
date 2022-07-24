@@ -93,6 +93,11 @@ router.get("/filtered/:tag", (req, res) => {
       res.sendStatus(500);
     });
 });
+// get all the tags for a specific post
+router.get("/tags/:id", (req, res) => {
+  console.log(req.params.id);
+  res.send("ribbit");
+});
 
 //--------POST--------//
 // post / post new post (lol)
