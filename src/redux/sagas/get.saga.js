@@ -61,8 +61,7 @@ function* getFollowedUserPosts() {
 function* getFilteredPosts(action) {
   try {
     const posts = yield axios.get(`/api/asset/filtered/${action.payload}`);
-    console.log(posts);
-    // yield put({ type: "SET_POSTS", payload: posts.data });
+    yield put({ type: "SET_POSTS", payload: posts.data });
   } catch (err) {
     console.log(err);
     yield put({

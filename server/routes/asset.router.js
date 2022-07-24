@@ -74,7 +74,24 @@ router.get("/followed", (req, res) => {
 // get all the posts that have a specific tag
 router.get("/filtered/:tag", (req, res) => {
   console.log(req.params.tag);
-  res.send("ribbit");
+  // store url param in array for query (trim any whitespace)
+  const getFilteredPostsValues = [req.params.tag.trim()];
+  const getFilteredPostsQueryString = `SELECT
+                                "user".username,  "user".image as profile_image, "user".about as profile_about,
+                                "post".id, "post".user_id, "post".lat, "post".lng, "post".title, "post".description, "post".audio, "post".image
+                                FROM "post"
+                                JOIN "user" ON "user".id = "post".user_id
+                                JOIN "tag" ON "tag".post_id = "post".id
+                                WHERE "tag".tag_name = $1;`;
+  pool
+    .query(getFilteredPostsQueryString, getFilteredPostsValues)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 //--------POST--------//
