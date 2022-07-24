@@ -48,9 +48,6 @@ function App() {
           <Redirect exact from="/" to="/home" />
 
           {/* ------------------UNPROTECTED ROUTES------------------ */}
-          <Route exact path="/landing">
-            <LandingPage />
-          </Route>
           <Route exact path="/about">
             <AboutPage />
           </Route>

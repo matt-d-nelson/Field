@@ -8,8 +8,6 @@ function LogOutButton(props) {
   const history = useHistory();
 
   const onLogout = () => {
-    console.log("in logout");
-    history.push("/landing");
     dispatch({ type: "LOGOUT" });
     dispatch({ type: "SET_POSTS", payload: [] });
   };
