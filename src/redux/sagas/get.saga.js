@@ -61,7 +61,21 @@ function* getFollowedUserPosts() {
 function* getFilteredPosts(action) {
   try {
     const posts = yield axios.get(`/api/asset/filtered/${action.payload}`);
-    yield put({ type: "SET_POSTS", payload: posts.data });
+    // check to see if any posts had the client requested tag
+    if (posts.data.length > 0) {
+      // if so, update posts reducer
+      yield put({ type: "SET_POSTS", payload: posts.data });
+    } else {
+      // if not, inform user
+      yield put({
+        type: "OPEN_MODAL",
+        payload: {
+          open: true,
+          type: "error",
+          message: "We couldn't find any posts with that tag.",
+        },
+      });
+    }
   } catch (err) {
     console.log(err);
     yield put({
