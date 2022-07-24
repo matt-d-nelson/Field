@@ -124,20 +124,49 @@ router.put(
   ]),
   (req, res) => {
     console.log(req.body);
-
+    // UPDATE USER TABLE
     updateQuery = generateUpdateQuery(req.body, req.files);
     console.log(updateQuery);
+    // confirm logged in user created the post being updated before sending query
     if (req.user.id === Number(req.body.user_id)) {
       pool
         .query(updateQuery.queryString, updateQuery.queryValues)
         .then((result) => {
-          res.sendStatus(200);
+          // REMOVE ALL TAGS FROM TAG TABLE
+          const removeTagsQueryString = `DELETE FROM "tag" WHERE "tag".post_id = $1;`;
+          const removeTagsQueryValues = [req.body.id];
+          pool
+            .query(removeTagsQueryString, removeTagsQueryValues)
+            .then((result) => {
+              // if there are any tags to add
+              if (req.body.tags != "") {
+                // ADD UPDATED TAGS INTO TAG TABLE
+                tagsQuery = generateTagsQuery(req.body.tags, req.body.id);
+                console.log(tagsQuery);
+                pool
+                  .query(tagsQuery.queryString, tagsQuery.queryValues)
+                  .then((result) => {
+                    res.sendStatus(200);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    res.sendStatus(500);
+                  });
+              } else {
+                res.sendStatus(200);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              res.sendStatus(500);
+            });
         })
         .catch((err) => {
           console.log(err);
           res.sendStatus(500);
         });
     } else {
+      // send forbidden response if logged in user didn't create the post being updated
       res.sendStatus(403);
     }
   }
@@ -245,6 +274,25 @@ function generateUpdateQuery(requestObject, requestFiles) {
   queryValues.push(requestObject.id);
   queryString += ` WHERE id = $${5 + indexCount};`;
 
+  return { queryString: queryString, queryValues: queryValues };
+}
+
+function generateTagsQuery(tagsString, postId) {
+  // split tag string on "," and store resulting array
+  const tagsArray = tagsString.split(",");
+  let queryValues = [postId];
+  let queryString = `INSERT INTO "tag" ("post_id", "tag_name") VALUES `;
+  // loop through array of tags
+  for (let i = 0; i < tagsArray.length; i++) {
+    // trim whitespace from tag and add to end of queryValues
+    queryValues.push(tagsArray[i].trim());
+    // add to query string based on index (+2 offset)
+    queryString += `($1, $${i + 2}),`;
+  }
+  // remove last ","
+  queryString = queryString.slice(0, -1);
+  queryString += ";";
+  // return string and values
   return { queryString: queryString, queryValues: queryValues };
 }
 
