@@ -92,7 +92,8 @@ function* getFilteredPosts(action) {
 function* getPostTags(action) {
   try {
     const tags = yield axios.get(`/api/asset/tags/${action.payload}`);
-    console.log("GET TAGS", tags);
+    console.log("GET TAGS", tags.data);
+    yield put({ type: "SET_TAGS", payload: tags.data });
   } catch (err) {
     console.log(err);
     yield put({

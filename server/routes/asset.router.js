@@ -96,7 +96,19 @@ router.get("/filtered/:tag", (req, res) => {
 // get all the tags for a specific post
 router.get("/tags/:id", (req, res) => {
   console.log(req.params.id);
-  res.send("ribbit");
+  const getTagsValues = [req.params.id];
+  const getTagsQueryString = `SELECT "tag".tag_name
+                              FROM "tag"
+                              WHERE "tag".post_id = $1;`;
+  pool
+    .query(getTagsQueryString, getTagsValues)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 //--------POST--------//

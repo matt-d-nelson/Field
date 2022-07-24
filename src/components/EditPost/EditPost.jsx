@@ -23,6 +23,7 @@ function EditPost() {
   //---------------------REDUCER STATE---------------------//
   const userData = useSelector((store) => store.user);
   const posts = useSelector((store) => store.posts);
+  const postTags = useSelector((store) => store.tags);
 
   //---------------------LOCAL STATE---------------------//
   // use state
