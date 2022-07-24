@@ -73,7 +73,7 @@ router.get("/followed", (req, res) => {
 });
 
 //--------POST--------//
-// post / post post (lol)
+// post / post new post (lol)
 router.post(
   "/",
   upload.fields([
@@ -81,6 +81,7 @@ router.post(
     { name: "audio", maxCount: 1 },
   ]),
   (req, res) => {
+    console.log("NEW POST", req.body);
     // structure req data as array for query
     const newPostValues = [
       req.body.user_id,
@@ -97,14 +98,29 @@ router.post(
     const newPostQueryString = `INSERT INTO "post" ("user_id", "lat", "lng", "title", "description", "audio", "image")
                                 VALUES ($1, $2, $3, $4, $5, $6, $7)
                                 RETURNING "id";`;
-
+    // INSERT INTO USER TABLE
     pool
       .query(newPostQueryString, newPostValues)
       .then((result) => {
-        const newPostId = result.rows[0].id;
-        console.log(newPostId);
-        // TODO FOR STRETCH - NESTED POOL QUERY TO ADD TAGS IN TAGS TABLE
-        res.sendStatus(200);
+        // if there are any tags to add
+        if (req.body.tags != "") {
+          // store id of previously created post
+          const newPostId = result.rows[0].id;
+          // ADD TAGS INTO TAG TABLE
+          tagsQuery = generateTagsQuery(req.body.tags, newPostId);
+          console.log(tagsQuery);
+          pool
+            .query(tagsQuery.queryString, tagsQuery.queryValues)
+            .then((result) => {
+              res.sendStatus(200);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.sendStatus(500);
+            });
+        } else {
+          res.sendStatus(200);
+        }
       })
       .catch((err) => {
         console.log(err);
