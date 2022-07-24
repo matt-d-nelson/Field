@@ -65,9 +65,9 @@ function* updateProfile(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your profile has been uploaded.",
+        message: "Your profile has been updated.",
         history: "/user",
-        confirmDispatch: { type: "FETCH_USER" },
+        returnDispatch: { type: "FETCH_USER" },
       },
     });
     // yield put({ type: "FETCH_USER" });

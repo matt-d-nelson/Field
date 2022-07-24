@@ -27,8 +27,8 @@ function GlobalModal(props) {
     if (modalData.history != undefined) {
       history.push(modalData.history);
     }
-    if (modalData.confirmDispatch != undefined) {
-      dispatch(modalData.confirmDispatch);
+    if (modalData.returnDispatch != undefined) {
+      dispatch(modalData.returnDispatch);
     }
   };
 
@@ -74,8 +74,8 @@ function GlobalModal(props) {
           <DialogTitle>Are you sure?</DialogTitle>
           <DialogContent>{modalData.message}</DialogContent>
           <DialogActions>
-            <Button onClick={onConfirm}>confirm</Button>
             <Button onClick={onReturn}>cancel</Button>
+            <Button onClick={onConfirm}>confirm</Button>
           </DialogActions>
         </Dialog>
       );
