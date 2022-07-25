@@ -5,6 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import libraries from "../MapLibraries/MapLibraries";
 import MapSearch from "../MapSearch/MapSearch";
+// styles
+import mapStyle from "../MapLibraries/MapStyle";
 
 // map container
 const mapContainerStyle = {
@@ -14,8 +16,9 @@ const mapContainerStyle = {
 };
 
 const options = {
+  styles: mapStyle,
   disableDefaultUI: true,
-  zoomControl: true,
+  // zoomControl: true,
 };
 
 function MapCreate(props) {

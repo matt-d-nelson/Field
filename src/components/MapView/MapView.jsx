@@ -1,5 +1,6 @@
 //---------------------IMPORTS---------------------//
 // styling
+import mapStyle from "../MapLibraries/MapStyle";
 import {
   Avatar,
   Button,
@@ -39,8 +40,9 @@ const center = {
 };
 
 const options = {
+  styles: mapStyle,
   disableDefaultUI: true,
-  zoomControl: true,
+  // zoomControl: true,
 };
 
 function MapView() {

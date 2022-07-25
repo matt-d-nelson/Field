@@ -1,3 +1,5 @@
+//---------------------IMPORTS---------------------//
+// libraries
 import {
   Combobox,
   ComboboxInput,
@@ -11,6 +13,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
+//---------------------IMPORTS---------------------//
 function MapSearch({ panTo }) {
   // deconstructed object returned from usePlacesAutocoplete
   const {
@@ -45,6 +48,7 @@ function MapSearch({ panTo }) {
     setValue(event.target.value);
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
     <div style={{ zIndex: 10 }}>
       <Combobox onSelect={panToAddress}>
