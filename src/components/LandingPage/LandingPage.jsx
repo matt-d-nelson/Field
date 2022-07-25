@@ -29,7 +29,7 @@ function LandingPage() {
   };
 
   return (
-    <div>
+    <div style={{ marginLeft: "5%", marginRight: "5%" }}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Card

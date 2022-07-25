@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "m3x6";
+  src: url("../../../public/fonts/m3x6.ttf") format("truetype");
+}
+
 html,
 body,
 #react-root {
@@ -5,7 +10,8 @@ body,
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "m3x6", sans-serif;
+  font-size: x-large;
   margin: 0px;
   text-align: center;
   background-image: url("../../../public/images/background.png");
