@@ -77,6 +77,12 @@ function MapCreate(props) {
       >
         {props.markers.map((marker) => (
           <Marker
+            icon={{
+              url: "images/icons/marker.svg",
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(10, 15),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
             position={{ lat: marker.lat, lng: marker.lng }}
             key={marker.lat}
           />

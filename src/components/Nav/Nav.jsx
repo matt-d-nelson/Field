@@ -19,9 +19,6 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
       <div>
         {/* ------------------UNPROTECTED LINKS------------------ */}
         {!user.id && (
@@ -44,7 +41,7 @@ function Nav() {
               <img src="images/icons/profile.svg" className="navImg" />
             </Link>
 
-            <button onClick={onLogout}>
+            <button onClick={onLogout} className="navLink">
               <img src="images/icons/logout.svg" className="navImg" />
             </button>
 
