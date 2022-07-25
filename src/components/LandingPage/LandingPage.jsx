@@ -40,6 +40,7 @@ function LandingPage() {
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               backgroundSize: "500px",
+              paddingRight: "4px",
             }}
           >
             <CardMedia>
@@ -51,21 +52,32 @@ function LandingPage() {
           <Button
             variant="outlined"
             onClick={onExplore}
-            style={{ width: "300px" }}
+            style={{
+              width: "360px",
+              border: "4px solid",
+              padding: "0px",
+            }}
           >
-            Explore
+            <Typography variant="h4">explore</Typography>
           </Button>
         </Grid>
-        <Grid item xs={12}>
-          <ButtonGroup style={{ width: "300px" }} fullWidth>
-            <Button variant="outlined" onClick={onRegister}>
-              Register
-            </Button>
-
-            <Button variant="outlined" onClick={onLogin}>
-              Login
-            </Button>
-          </ButtonGroup>
+        <Grid item xs={6} align="right">
+          <Button
+            variant="outlined"
+            onClick={onRegister}
+            style={{ border: "4px solid", padding: "0px", width: "176px" }}
+          >
+            <Typography variant="h4">register</Typography>
+          </Button>
+        </Grid>
+        <Grid item xs={6} align="left">
+          <Button
+            variant="outlined"
+            onClick={onLogin}
+            style={{ border: "4px solid", padding: "0px", width: "176px" }}
+          >
+            <Typography variant="h4">login</Typography>
+          </Button>
         </Grid>
       </Grid>
     </div>
