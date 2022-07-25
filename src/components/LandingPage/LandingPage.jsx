@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./LandingPage.css";
 
 // CUSTOM COMPONENTS
-import RegisterForm from "../RegisterForm/RegisterForm";
-import { Button, Typography } from "@material-ui/core";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 
 function LandingPage() {
   const [heading, setHeading] = useState("Welcome");
@@ -24,18 +30,44 @@ function LandingPage() {
 
   return (
     <div>
-      <Typography variant="h1">FIELD</Typography>
-      <Button variant="outlined" onClick={onExplore}>
-        Explore
-      </Button>
-      <br />
-      <Button variant="outlined" onClick={onRegister}>
-        Register
-      </Button>
-      <br />
-      <Button variant="outlined" onClick={onLogin}>
-        Login
-      </Button>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <Card
+            style={{
+              boxShadow: "none",
+              backgroundImage: "url(images/waterfallMoving.gif)",
+              backgroundColor: "transparent",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "500px",
+            }}
+          >
+            <CardMedia>
+              <img src="images/logo.png" width="500px" />
+            </CardMedia>
+          </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="outlined"
+            onClick={onExplore}
+            style={{ width: "300px" }}
+          >
+            Explore
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <ButtonGroup style={{ width: "300px" }} fullWidth>
+            <Button variant="outlined" onClick={onRegister}>
+              Register
+            </Button>
+
+            <Button variant="outlined" onClick={onLogin}>
+              Login
+            </Button>
+          </ButtonGroup>
+        </Grid>
+      </Grid>
     </div>
   );
 }
