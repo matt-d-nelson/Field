@@ -40,3 +40,7 @@
 .navLink:hover {
   background-color: #008183;
 }
+
+.navImg {
+  width: 75px;
+}
