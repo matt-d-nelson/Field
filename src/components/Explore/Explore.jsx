@@ -1,3 +1,5 @@
+// USELESS COMPONENT / REFACTOR
+
 //---------------------IMPORTS---------------------//
 // styling
 import { Button, Typography } from "@material-ui/core";
@@ -15,8 +17,6 @@ function Explore() {
 
   return (
     <div>
-      <Typography variant="h3">Explore</Typography>
-      <p>View 2.1</p>
       <MapView />
     </div>
   );

@@ -1,5 +1,6 @@
 //---------------------IMPORTS---------------------//
 // libraries
+import { TextField } from "@material-ui/core";
 import {
   Combobox,
   ComboboxInput,
@@ -50,15 +51,33 @@ function MapSearch({ panTo }) {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div style={{ zIndex: 10 }}>
+    <div>
+      <TextField
+        onChange={setAutocompleteVal}
+        disabled={!ready}
+        value={value}
+        fullWidth
+        variant="filled"
+        placeholder="search location"
+      />
       <Combobox onSelect={panToAddress}>
         <ComboboxInput
           value={value}
           onChange={setAutocompleteVal}
           disabled={!ready}
-          placeholder="search address"
+          hidden
         />
-        <ComboboxPopover>
+        <ComboboxPopover
+          style={{
+            width: "300px",
+            position: "absolute",
+            // background: "transparent",
+            border: "none",
+            zIndex: 10,
+            top: "250px",
+            left: "30px",
+          }}
+        >
           <ComboboxList>
             {status === "OK" &&
               data.map(({ place_id, description }) => (

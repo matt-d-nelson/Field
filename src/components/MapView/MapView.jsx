@@ -30,7 +30,8 @@ import FilterPosts from "../FilterPosts/FilterPosts";
 
 //-------------------------------------- map container style as needed
 const mapContainerStyle = {
-  height: "600px",
+  width: "100vw",
+  height: "100vh",
 };
 //-------------------------------------- store in reducer
 const center = {
@@ -96,8 +97,23 @@ function MapView() {
   //---------------------JSX RETURN---------------------//
   return (
     <div>
-      <FilterPosts />
-      <Search panTo={panTo} />
+      <div className="aboveMap">
+        <Card style={{ maxWidth: "300px" }}>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <Typography variant="h3">Explore</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <FilterPosts />
+              </Grid>
+              <Grid item xs={12}>
+                <Search panTo={panTo} />
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={3}
