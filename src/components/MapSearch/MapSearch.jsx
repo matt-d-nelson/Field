@@ -15,7 +15,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 
 //---------------------IMPORTS---------------------//
-function MapSearch({ panTo }) {
+function MapSearch(props) {
   // deconstructed object returned from usePlacesAutocoplete
   const {
     ready,
@@ -37,7 +37,7 @@ function MapSearch({ panTo }) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
-      panTo({ lat, lng });
+      props.panTo({ lat, lng });
       console.log(lat, lng);
     } catch (err) {
       console.log(err);
@@ -74,8 +74,8 @@ function MapSearch({ panTo }) {
             // background: "transparent",
             border: "none",
             zIndex: 10,
-            top: "250px",
-            left: "30px",
+            top: props.posY,
+            left: props.posX,
           }}
         >
           <ComboboxList>
