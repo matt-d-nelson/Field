@@ -3,6 +3,11 @@
   src: url("../../../public/fonts/m3x6.ttf") format("truetype");
 }
 
+:root {
+  --transparentGreen: rgb(83, 142, 82, 0.8);
+  --transparentWhite: rgb(255, 247, 239, 0.6);
+}
+
 html,
 body,
 #react-root {

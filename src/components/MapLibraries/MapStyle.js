@@ -1,13 +1,22 @@
 const mapStyle = [
   {
     featureType: "administrative",
+    elementType: "all",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
+    featureType: "administrative",
     elementType: "labels.text",
     stylers: [
       {
         visibility: "simplified",
       },
       {
-        color: "#e5cfa7",
+        color: "#4a5a39",
       },
     ],
   },
@@ -19,7 +28,7 @@ const mapStyle = [
         visibility: "simplified",
       },
       {
-        color: "#b2a181",
+        color: "#fff7ef",
       },
     ],
   },
@@ -58,7 +67,7 @@ const mapStyle = [
     elementType: "labels.text",
     stylers: [
       {
-        visibility: "off",
+        visibility: "simplified",
       },
     ],
   },
@@ -79,7 +88,7 @@ const mapStyle = [
     elementType: "labels.text",
     stylers: [
       {
-        visibility: "off",
+        visibility: "simplified",
       },
       {
         color: "#ff0000",
@@ -174,6 +183,15 @@ const mapStyle = [
     ],
   },
   {
+    featureType: "road.highway",
+    elementType: "labels.text",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
+  {
     featureType: "road.highway.controlled_access",
     elementType: "geometry",
     stylers: [
@@ -190,10 +208,10 @@ const mapStyle = [
     elementType: "geometry",
     stylers: [
       {
-        visibility: "off",
+        visibility: "simplified",
       },
       {
-        color: "#ff0000",
+        color: "#a28b60",
       },
     ],
   },
@@ -202,10 +220,10 @@ const mapStyle = [
     elementType: "geometry",
     stylers: [
       {
-        visibility: "off",
+        visibility: "on",
       },
       {
-        color: "#ff0000",
+        color: "#d7cab3",
       },
     ],
   },
@@ -268,7 +286,7 @@ const mapStyle = [
     elementType: "labels.text",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
       {
         color: "#5d8d8b",
@@ -280,7 +298,7 @@ const mapStyle = [
     elementType: "labels.text.fill",
     stylers: [
       {
-        visibility: "on",
+        visibility: "off",
       },
     ],
   },

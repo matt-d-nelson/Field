@@ -40,11 +40,23 @@ function FilterPosts() {
           placeholder="filter posts by tag"
           onChange={updateTag}
           fullWidth
+          inputProps={{ style: { fontSize: 30 } }}
+          label="filter"
         />
       </Grid>
       <Grid item xs={4}>
-        <Button variant="outlined" onClick={onFilter} fullWidth>
-          filter
+        <Button
+          variant="outlined"
+          onClick={onFilter}
+          fullWidth
+          style={{ border: "4px solid" }}
+        >
+          <Typography
+            variant="h4"
+            style={{ paddingBottom: "7px", paddingTop: "7px" }}
+          >
+            filter
+          </Typography>
         </Button>
       </Grid>
     </Grid>

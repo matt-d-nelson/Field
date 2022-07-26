@@ -59,6 +59,8 @@ function MapSearch(props) {
         fullWidth
         variant="filled"
         placeholder="search location"
+        label="search"
+        inputProps={{ style: { fontSize: 30 } }}
       />
       <Combobox onSelect={panToAddress}>
         <ComboboxInput
@@ -69,9 +71,9 @@ function MapSearch(props) {
         />
         <ComboboxPopover
           style={{
-            width: "300px",
+            width: "250px",
             position: "absolute",
-            // background: "transparent",
+            backgroundColor: "var(--transparentGreen)",
             border: "none",
             zIndex: 10,
             top: props.posY,

@@ -10,6 +10,11 @@ const theme = createTheme({
   shape: {
     borderRadius: 0,
   },
+  palette: {
+    primary: { main: "rgb(83, 142, 82)" },
+    secondary: { main: "rgb(150, 60, 47)" },
+    info: { main: "rgb(111, 177, 175)" },
+  },
 });
 
 export default theme;

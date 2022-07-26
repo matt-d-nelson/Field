@@ -98,7 +98,12 @@ function MapView() {
   return (
     <div>
       <div className="aboveMap">
-        <Card style={{ maxWidth: "300px" }}>
+        <Card
+          style={{
+            maxWidth: "250px",
+            backgroundColor: "var(--transparentWhite)",
+          }}
+        >
           <CardContent>
             <Grid container spacing={1}>
               <Grid item xs={12}>
@@ -108,7 +113,7 @@ function MapView() {
                 <FilterPosts />
               </Grid>
               <Grid item xs={12}>
-                <Search panTo={panTo} posX={"30px"} posY={"250px"} />
+                <Search panTo={panTo} posX={"30px"} posY={"287px"} />
               </Grid>
             </Grid>
           </CardContent>
