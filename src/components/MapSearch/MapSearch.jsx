@@ -73,7 +73,7 @@ function MapSearch(props) {
           style={{
             width: "250px",
             position: "absolute",
-            backgroundColor: "var(--transparentGreen)",
+            backgroundColor: "var(--transparentWhite)",
             border: "none",
             zIndex: 10,
             top: props.posY,

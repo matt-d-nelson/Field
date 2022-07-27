@@ -102,6 +102,7 @@ function MapView() {
           style={{
             maxWidth: "250px",
             backgroundColor: "var(--transparentWhite)",
+            border: "10px solid white",
           }}
         >
           <CardContent>
@@ -113,7 +114,7 @@ function MapView() {
                 <FilterPosts />
               </Grid>
               <Grid item xs={12}>
-                <Search panTo={panTo} posX={"30px"} posY={"287px"} />
+                <Search panTo={panTo} posX={"40px"} posY={"310px"} />
               </Grid>
             </Grid>
           </CardContent>
@@ -149,13 +150,17 @@ function MapView() {
           // info window is a gmaps component that can take one child and hold any components
           <InfoWindow
             position={{ lat: Number(selected.lat), lng: Number(selected.lng) }}
+            style={{ backgroundColor: "transparent" }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
             <div>
               <Card
-                style={{ boxShadow: "none", backgroundColor: "transparent" }}
+                style={{
+                  boxShadow: "none",
+                  backgroundColor: "transparent",
+                }}
               >
                 <PostCardDisplay user={user} selected={selected} />
               </Card>

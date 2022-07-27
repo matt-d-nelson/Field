@@ -33,12 +33,14 @@ function PostCardDisplay(props) {
   return (
     <div>
       <CardHeader
-        style={{ textAlign: "left" }}
+        className="postHeader"
         title={props.selected.username}
+        titleTypographyProps={{ variant: "h3" }}
+        onClick={onAvatar}
         avatar={
           <Avatar
             variant="square"
-            onClick={onAvatar}
+            style={{ height: "60px", width: "60px", border: "4px solid" }}
             src={props.selected.profile_image}
           >
             {props.selected.username[0]}
@@ -46,28 +48,28 @@ function PostCardDisplay(props) {
         }
       />
       <CardContent>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={6} align="right">
             <Avatar
-              style={{ height: "200px", width: "150px" }}
+              style={{ height: "200px", width: "150px", border: "4px solid" }}
               variant="square"
               src={props.selected.image}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} align="left">
             <Grid container direction="column" spacing={1}>
               <Grid item>
-                <Typography>{props.selected.title}</Typography>
+                <Typography variant="h4">{props.selected.title}</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body1" paragraph>
+                <Typography variant="h5" paragraph>
                   {props.selected.description}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item>
-            <audio controls>
+            <audio controls style={{ borderRadius: "0" }}>
               <source src={props.selected.audio} type="audio/mp3" />
             </audio>
           </Grid>

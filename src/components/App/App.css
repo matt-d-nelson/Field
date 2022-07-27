@@ -73,7 +73,7 @@ Button
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
-.btn_asLink {
+/* .btn_asLink {
   padding: 0;
   border-width: 0;
   border-bottom: 1px solid #444;
@@ -125,12 +125,31 @@ input {
   margin-bottom: 10px;
 }
 
-/* --------------------------------------------------------------------------------
-Form Treatment
--------------------------------------------------------------------------------- */
+/* explore style for filtering and searching map markers */
 .aboveMap {
   z-index: 10;
   position: absolute;
   left: 30px;
   top: 30px;
+}
+
+/* overwritten style for the google maps info window */
+.gm-style .gm-style-iw-c {
+  width: 450px !important;
+  height: 420px !important;
+  background-color: var(--transparentWhite) !important;
+  background-image: url("/public/images/info-export.png");
+  background-size: 100%;
+  border-radius: 0px;
+}
+
+/* styling for post card display */
+.postHeader {
+  text-align: left;
+  background-size: 80%;
+  transition: all 0.2s ease-in-out;
+}
+
+.postHeader:hover {
+  background-color: white;
 }
