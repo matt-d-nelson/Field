@@ -76,20 +76,25 @@ function ForeignUserProfile() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div>
-      <Typography variant="h3">Foreign User Profile</Typography>
-      <p>View 2.3 User ID: {thisUserId.id}</p>
+    <div style={{ marginLeft: "5%", marginRight: "5%", paddingTop: "90px" }}>
       {posts.length > 0 ? (
         <div>
           <Grid container justifyContent="center">
             <Grid item>
-              <Card style={{ maxWidth: "500px" }}>
+              <Card
+                style={{ backgroundColor: "var(--transparentWhite)" }}
+                className="profileCard"
+              >
                 <CardHeader title={`${posts[0].username}`} />
                 <CardContent>
                   <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={6} align="right">
                       <Avatar
-                        style={{ height: "190px", width: "190px" }}
+                        style={{
+                          height: "181px",
+                          width: "192px",
+                          border: "4px solid",
+                        }}
                         variant="square"
                         src={posts[0].profile_image}
                       >
@@ -104,40 +109,50 @@ function ForeignUserProfile() {
                         multiline
                         minRows={8}
                         maxRows={8}
+                        fullWidth
                       />
                     </Grid>
-                    <Grid item xs={12} display="flex">
-                      <ButtonGroup fullWidth>
-                        <Button variant="outlined" onClick={onReturn}>
-                          return
+                    <Grid item xs={6}>
+                      <Button variant="outlined" onClick={onReturn} fullWidth>
+                        return
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      {/* conditional render to check if the logged in user is following this user profile */}
+                      {followedPosts.filter(
+                        (post) =>
+                          Number(post.followed_user_id) ===
+                          Number(thisUserId.id)
+                      ).length > 0 ? (
+                        <Button
+                          variant="outlined"
+                          onClick={onUnfollow}
+                          fullWidth
+                        >
+                          unfollow
                         </Button>
-                        {/* conditional render to check if the logged in user is following this user profile */}
-                        {followedPosts.filter(
-                          (post) =>
-                            Number(post.followed_user_id) ===
-                            Number(thisUserId.id)
-                        ).length > 0 ? (
-                          <Button variant="outlined" onClick={onUnfollow}>
-                            unfollow
-                          </Button>
-                        ) : (
-                          <Button variant="outlined" onClick={onFollow}>
-                            follow
-                          </Button>
-                        )}
-                      </ButtonGroup>
+                      ) : (
+                        <Button variant="outlined" onClick={onFollow} fullWidth>
+                          follow
+                        </Button>
+                      )}
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
-          <Typography variant="h4">posts</Typography>
+          <Typography variant="h4">
+            {posts[0].username}'s' recordings
+          </Typography>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={2} justifyContent="center">
             {posts.map((post) => (
-              <Grid item xs={4} key={post.id}>
-                <Card>
+              <Grid item xs={4} key={post.id} align="center">
+                <Card
+                  className="postCard"
+                  style={{ backgroundColor: "var(--transparentWhite)" }}
+                >
                   <PostCardDisplay user={user} selected={post} />
                 </Card>
               </Grid>

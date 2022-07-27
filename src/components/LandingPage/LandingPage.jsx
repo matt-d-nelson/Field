@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 // CUSTOM COMPONENTS
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardActions,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Button, Card, CardMedia, Grid, Typography } from "@material-ui/core";
 
 function LandingPage() {
   const [heading, setHeading] = useState("Welcome");
