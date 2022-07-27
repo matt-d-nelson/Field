@@ -28,9 +28,9 @@ function NewPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
-  const [picturePath, setPicturePath] = useState("upload image");
+  const [picturePath, setPicturePath] = useState("(none selected)");
   const [audio, setAudio] = useState("");
-  const [audioPath, setAudioPath] = useState("upload audio");
+  const [audioPath, setAudioPath] = useState("(none selected)");
   const [tags, setTags] = useState("");
 
   //---------------------EVENT HANDLERS---------------------//
@@ -135,7 +135,9 @@ function NewPost() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div style={{ paddingTop: "90px", marginLeft: "5%", marginRight: "5%" }}>
+    <div
+      style={{ paddingTop: "90px", marginLeft: "30px", marginRight: "30px" }}
+    >
       <Typography variant="h3">New Post</Typography>
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -145,6 +147,7 @@ function NewPost() {
           <Grid container direction="column" spacing={1}>
             <Grid item>
               <TextField
+                inputProps={{ style: { fontSize: 30 } }}
                 variant="filled"
                 label="title"
                 fullWidth
@@ -155,50 +158,95 @@ function NewPost() {
               <TextField
                 variant="filled"
                 label="description"
+                inputProps={{ style: { fontSize: 30 } }}
                 multiline
-                minRows={10}
+                minRows={8}
                 fullWidth
                 onChange={onDescriptionChange}
               />
             </Grid>
             <Grid item>
               <TextField
+                inputProps={{ style: { fontSize: 30 } }}
                 variant="filled"
                 label="tags"
                 fullWidth
                 onChange={onTagsChange}
               />
             </Grid>
+            <Grid container justifyContent="space-evenly">
+              <Grid item sx={6}>
+                <Typography variant="h5">file: {audioPath}</Typography>
+              </Grid>
+              <Grid item sx={6}>
+                <Typography variant="h5">file: {picturePath}</Typography>
+              </Grid>
+            </Grid>
             <Grid item>
-              <ButtonGroup fullWidth>
-                <Button component="label" variant="contained">
+              <ButtonGroup fullWidth style={{ marginBottom: "0px" }}>
+                <Button
+                  component="label"
+                  variant="outlined"
+                  style={{
+                    border: "4px solid",
+                    padding: "0px",
+                  }}
+                >
                   <input
                     name="audio"
                     type="file"
                     onChange={onAudioChange}
                     hidden
                   />
-                  <Typography>{audioPath}</Typography>
+                  <Typography variant="h4">upload audio</Typography>
                 </Button>
-                <Button component="label" variant="contained">
+                <Button
+                  component="label"
+                  variant="outlined"
+                  style={{
+                    border: "4px solid",
+                    padding: "0px",
+                    marginLeft: "20px",
+                  }}
+                >
                   <input
                     type="file"
                     name="picture"
                     onChange={onPictureChange}
                     hidden
                   />
-                  <Typography>{picturePath}</Typography>
+                  <Typography variant="h4">upload image</Typography>
                 </Button>
               </ButtonGroup>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="outlined" onClick={onCancel}>
-            <Typography>cancel</Typography>
+          <Button
+            variant="outlined"
+            onClick={onCancel}
+            style={{
+              border: "4px solid",
+              padding: "0px",
+              marginRight: "8px",
+              width: "200px",
+            }}
+            color="secondary"
+          >
+            <Typography variant="h4">cancel</Typography>
           </Button>
-          <Button variant="outlined" onClick={onSubmit}>
-            <Typography>submit</Typography>
+          <Button
+            variant="outlined"
+            onClick={onSubmit}
+            style={{
+              border: "4px solid",
+              padding: "0px",
+              marginLeft: "7px",
+              width: "200px",
+            }}
+            color="primary"
+          >
+            <Typography variant="h4">submit</Typography>
           </Button>
         </Grid>
       </Grid>

@@ -66,7 +66,7 @@ function MapCreate(props) {
 
   return (
     <div>
-      <MapSearch panTo={panTo} />
+      <MapSearch panTo={panTo} posX={"40px"} posY={"230px"} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={2}
