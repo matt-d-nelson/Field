@@ -89,10 +89,6 @@ input {
   border-radius: 0px;
 }
 
-.MuiInputBase-input.Mui-disabled {
-  color: "#000";
-}
-
 /* styling for post card display */
 .postHeader {
   text-align: left;

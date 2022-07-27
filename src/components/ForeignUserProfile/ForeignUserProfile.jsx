@@ -139,6 +139,7 @@ function ForeignUserProfile() {
                           variant="outlined"
                           onClick={onUnfollow}
                           fullWidth
+                          style={{ border: "4px solid", padding: "0px" }}
                         >
                           <Typography variant="h4">unfollow</Typography>
                         </Button>

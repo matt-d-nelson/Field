@@ -58,6 +58,18 @@ function PostCardDisplay(props) {
           </Grid>
           <Grid item xs={6} align="left">
             <Grid container direction="column" spacing={1}>
+              {props.user.id === props.selected.user_id ? (
+                <Grid item>
+                  {/* navigate to edit window on click */}
+                  <Button
+                    onClick={onEdit}
+                    fullWidth
+                    style={{ border: "4px solid", padding: "0px" }}
+                  >
+                    <Typography variant="h5">edit this post</Typography>
+                  </Button>
+                </Grid>
+              ) : null}
               <Grid item>
                 <Typography variant="h4">{props.selected.title}</Typography>
               </Grid>
@@ -73,12 +85,6 @@ function PostCardDisplay(props) {
               <source src={props.selected.audio} type="audio/mp3" />
             </audio>
           </Grid>
-          {props.user.id === props.selected.user_id ? (
-            <Grid item>
-              {/* navigate to edit window on click */}
-              <Button onClick={onEdit}>edit</Button>
-            </Grid>
-          ) : null}
         </Grid>
       </CardContent>
     </div>

@@ -58,17 +58,36 @@ function UserProfile() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div>
-      <p>View 3.0</p>
+    <div
+      style={{
+        marginLeft: "5%",
+        marginRight: "5%",
+        paddingTop: "90px",
+      }}
+    >
       <Grid container justifyContent="center">
         <Grid item>
-          <Card style={{ maxWidth: "500px" }}>
-            <CardHeader title={`Welcome back,  ${user.username}`} />
+          <Card
+            style={{
+              backgroundColor: "var(--transparentWhite)",
+              marginBottom: "20px",
+            }}
+            className="profileCard"
+          >
+            <CardHeader
+              title={`Welcome back,  ${user.username}`}
+              titleTypographyProps={{ variant: "h3" }}
+              style={{ padding: "0" }}
+            />
             <CardContent>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={6} align="right">
                   <Avatar
-                    style={{ height: "190px", width: "190px" }}
+                    style={{
+                      height: "183px",
+                      width: "192px",
+                      border: "4px solid",
+                    }}
                     variant="square"
                     src={user.image}
                   >
@@ -78,42 +97,69 @@ function UserProfile() {
                 <Grid item xs={6} align="left">
                   <TextField
                     variant="outlined"
+                    inputProps={{ style: { fontSize: 30 } }}
                     disabled
                     defaultValue={user.about}
                     multiline
-                    minRows={8}
-                    maxRows={8}
+                    minRows={7}
+                    maxRows={7}
+                    fullWidth
                   />
                 </Grid>
-                <Grid item xs={12} display="flex">
-                  <ButtonGroup fullWidth>
-                    <Button variant="outlined" onClick={newPost}>
-                      new post
-                    </Button>
-                    <Button variant="outlined" onClick={editProfile}>
-                      edit profile
-                    </Button>
-                  </ButtonGroup>
+                <Grid item xs={2}>
+                  <Button
+                    variant="outlined"
+                    onClick={newPost}
+                    fullWidth
+                    style={{ border: "4px solid", padding: "0px" }}
+                  >
+                    <Typography variant="h4">new</Typography>
+                  </Button>
+                </Grid>
+                <Grid item xs={4}>
+                  <Button
+                    variant="outlined"
+                    onClick={editProfile}
+                    fullWidth
+                    style={{ border: "4px solid", padding: "0px" }}
+                  >
+                    <Typography variant="h4">edit profile</Typography>
+                  </Button>
+                </Grid>
+                <Grid item xs={3}>
+                  <Button
+                    variant="outlined"
+                    onClick={onYourPosts}
+                    fullWidth
+                    style={{ border: "4px solid", padding: "0px" }}
+                  >
+                    <Typography variant="h4">posts</Typography>
+                  </Button>
+                </Grid>
+                <Grid item xs={3}>
+                  <Button
+                    variant="outlined"
+                    onClick={onYourFeed}
+                    fullWidth
+                    style={{ border: "4px solid", padding: "0px" }}
+                  >
+                    <Typography variant="h4">feed</Typography>
+                  </Button>
                 </Grid>
               </Grid>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      <ButtonGroup>
-        <Button variant="outlined" onClick={onYourPosts}>
-          your posts
-        </Button>
-        <Button variant="outlined" onClick={onYourFeed}>
-          your feed
-        </Button>
-      </ButtonGroup>
 
       {yourPosts ? (
         <Grid container spacing={2}>
           {posts.map((post) => (
             <Grid item xs={4} key={post.id}>
-              <Card>
+              <Card
+                className="postCard"
+                style={{ backgroundColor: "var(--transparentWhite)" }}
+              >
                 <PostCardDisplay user={user} selected={post} />
               </Card>
             </Grid>
@@ -123,7 +169,10 @@ function UserProfile() {
         <Grid container spacing={2}>
           {followedPosts.map((post) => (
             <Grid item xs={4} key={post.id}>
-              <Card>
+              <Card
+                className="postCard"
+                style={{ backgroundColor: "var(--transparentWhite)" }}
+              >
                 <PostCardDisplay user={user} selected={post} />
               </Card>
             </Grid>
