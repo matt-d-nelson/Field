@@ -5,7 +5,7 @@
 
 :root {
   --transparentGreen: rgb(83, 142, 82, 0.8);
-  --transparentWhite: rgb(255, 247, 239, 0.6);
+  --transparentWhite: rgb(255, 255, 255, 0.6);
 }
 
 html,
@@ -87,6 +87,10 @@ input {
   background-image: url("/public/images/info-export.png");
   background-size: 100%;
   border-radius: 0px;
+}
+
+.MuiInputBase-input.Mui-disabled {
+  color: "#000";
 }
 
 /* styling for post card display */

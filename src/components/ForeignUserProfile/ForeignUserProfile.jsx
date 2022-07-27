@@ -8,6 +8,7 @@ import {
   CardContent,
   CardHeader,
   Grid,
+  styled,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -85,13 +86,17 @@ function ForeignUserProfile() {
                 style={{ backgroundColor: "var(--transparentWhite)" }}
                 className="profileCard"
               >
-                <CardHeader title={`${posts[0].username}`} />
+                <CardHeader
+                  title={`${posts[0].username}`}
+                  titleTypographyProps={{ variant: "h3" }}
+                  style={{ padding: "0" }}
+                />
                 <CardContent>
                   <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={6} align="right">
                       <Avatar
                         style={{
-                          height: "181px",
+                          height: "183px",
                           width: "192px",
                           border: "4px solid",
                         }}
@@ -104,17 +109,23 @@ function ForeignUserProfile() {
                     <Grid item xs={6} align="left">
                       <TextField
                         variant="outlined"
+                        inputProps={{ style: { fontSize: 30 } }}
                         disabled
                         defaultValue={posts[0].profile_about}
                         multiline
-                        minRows={8}
-                        maxRows={8}
+                        minRows={7}
+                        maxRows={7}
                         fullWidth
                       />
                     </Grid>
                     <Grid item xs={6}>
-                      <Button variant="outlined" onClick={onReturn} fullWidth>
-                        return
+                      <Button
+                        variant="outlined"
+                        onClick={onReturn}
+                        fullWidth
+                        style={{ border: "4px solid", padding: "0px" }}
+                      >
+                        <Typography variant="h4">return</Typography>
                       </Button>
                     </Grid>
                     <Grid item xs={6}>
@@ -129,11 +140,16 @@ function ForeignUserProfile() {
                           onClick={onUnfollow}
                           fullWidth
                         >
-                          unfollow
+                          <Typography variant="h4">unfollow</Typography>
                         </Button>
                       ) : (
-                        <Button variant="outlined" onClick={onFollow} fullWidth>
-                          follow
+                        <Button
+                          variant="outlined"
+                          onClick={onFollow}
+                          fullWidth
+                          style={{ border: "4px solid", padding: "0px" }}
+                        >
+                          <Typography variant="h4">follow</Typography>
                         </Button>
                       )}
                     </Grid>
@@ -142,9 +158,7 @@ function ForeignUserProfile() {
               </Card>
             </Grid>
           </Grid>
-          <Typography variant="h4">
-            {posts[0].username}'s' recordings
-          </Typography>
+          <Typography variant="h4">{posts[0].username}'s recordings</Typography>
 
           <Grid container spacing={2} justifyContent="center">
             {posts.map((post) => (
