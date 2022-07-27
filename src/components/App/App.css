@@ -110,5 +110,5 @@ input {
 /* styling for profile information */
 .profileCard {
   width: 450px;
-  border: 8px solid white;
+  /* border: 8px solid white; */
 }

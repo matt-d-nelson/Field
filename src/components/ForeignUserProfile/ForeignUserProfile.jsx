@@ -83,8 +83,9 @@ function ForeignUserProfile() {
           <Grid container justifyContent="center">
             <Grid item>
               <Card
-                style={{ backgroundColor: "var(--transparentWhite)" }}
+                style={{ backgroundColor: "transparent" }}
                 className="profileCard"
+                elevation={0}
               >
                 <CardHeader
                   title={`${posts[0].username}`}

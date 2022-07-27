@@ -69,9 +69,10 @@ function UserProfile() {
         <Grid item>
           <Card
             style={{
-              backgroundColor: "var(--transparentWhite)",
+              backgroundColor: "transparent",
               marginBottom: "20px",
             }}
+            elevation={0}
             className="profileCard"
           >
             <CardHeader

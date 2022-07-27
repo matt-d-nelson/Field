@@ -114,7 +114,7 @@ function MapView() {
                 <FilterPosts />
               </Grid>
               <Grid item xs={12}>
-                <Search panTo={panTo} posX={"40px"} posY={"310px"} />
+                <Search panTo={panTo} posX={"40px"} posY={"308px"} />
               </Grid>
             </Grid>
           </CardContent>

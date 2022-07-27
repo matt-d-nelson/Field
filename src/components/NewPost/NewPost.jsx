@@ -135,9 +135,8 @@ function NewPost() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div style={{ padding: "20px", marginLeft: "5%", marginRight: "5%" }}>
+    <div style={{ paddingTop: "90px", marginLeft: "5%", marginRight: "5%" }}>
       <Typography variant="h3">New Post</Typography>
-      <p>View 3.2</p>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <MapCreate setMarkers={setMarkers} markers={markers} />
