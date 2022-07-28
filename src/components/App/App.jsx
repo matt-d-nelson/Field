@@ -16,8 +16,6 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import UserProfile from "../UserProfile/UserProfile";
 import LandingPage from "../LandingPage/LandingPage";
-import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
 import Explore from "../Explore/Explore";
@@ -74,26 +72,7 @@ function App() {
           </ProtectedRoute>
 
           {/* ------------------VARIABLE ROUTES------------------ */}
-          <Route exact path="/login">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
-          </Route>
-          <Route exact path="/registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
+
           <Route exact path="/home">
             {user.id ? (
               // If the user is already logged in,
@@ -106,7 +85,7 @@ function App() {
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <h1 style={{ paddingTop: "70px" }}>404: page not found</h1>
           </Route>
         </Switch>
         {/* <Footer /> */}
