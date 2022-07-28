@@ -5,6 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import libraries from "../MapLibraries/MapLibraries";
 import MapSearch from "../MapSearch/MapSearch";
+// styles
+import mapStyle from "../MapLibraries/MapStyle";
 
 // map container
 const mapContainerStyle = {
@@ -14,8 +16,9 @@ const mapContainerStyle = {
 };
 
 const options = {
+  styles: mapStyle,
   disableDefaultUI: true,
-  zoomControl: true,
+  // zoomControl: true,
 };
 
 function MapCreate(props) {
@@ -63,7 +66,7 @@ function MapCreate(props) {
 
   return (
     <div>
-      <MapSearch panTo={panTo} />
+      <MapSearch panTo={panTo} posX={"40px"} posY={"230px"} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={2}
@@ -74,6 +77,12 @@ function MapCreate(props) {
       >
         {props.markers.map((marker) => (
           <Marker
+            icon={{
+              url: "images/icons/marker.svg",
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(10, 15),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
             position={{ lat: marker.lat, lng: marker.lng }}
             key={marker.lat}
           />

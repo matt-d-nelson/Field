@@ -8,6 +8,7 @@ import {
   CardContent,
   CardHeader,
   Grid,
+  styled,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -76,20 +77,30 @@ function ForeignUserProfile() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div>
-      <Typography variant="h3">Foreign User Profile</Typography>
-      <p>View 2.3 User ID: {thisUserId.id}</p>
+    <div style={{ marginLeft: "5%", marginRight: "5%", paddingTop: "90px" }}>
       {posts.length > 0 ? (
         <div>
           <Grid container justifyContent="center">
             <Grid item>
-              <Card style={{ maxWidth: "500px" }}>
-                <CardHeader title={`${posts[0].username}`} />
+              <Card
+                style={{ backgroundColor: "transparent" }}
+                className="profileCard"
+                elevation={0}
+              >
+                <CardHeader
+                  title={`${posts[0].username}`}
+                  titleTypographyProps={{ variant: "h3" }}
+                  style={{ padding: "0" }}
+                />
                 <CardContent>
                   <Grid container spacing={2} justifyContent="center">
                     <Grid item xs={6} align="right">
                       <Avatar
-                        style={{ height: "190px", width: "190px" }}
+                        style={{
+                          height: "183px",
+                          width: "192px",
+                          border: "4px solid",
+                        }}
                         variant="square"
                         src={posts[0].profile_image}
                       >
@@ -99,45 +110,65 @@ function ForeignUserProfile() {
                     <Grid item xs={6} align="left">
                       <TextField
                         variant="outlined"
+                        inputProps={{ style: { fontSize: 30 } }}
                         disabled
                         defaultValue={posts[0].profile_about}
                         multiline
-                        minRows={8}
-                        maxRows={8}
+                        minRows={7}
+                        maxRows={7}
+                        fullWidth
                       />
                     </Grid>
-                    <Grid item xs={12} display="flex">
-                      <ButtonGroup fullWidth>
-                        <Button variant="outlined" onClick={onReturn}>
-                          return
+                    <Grid item xs={6}>
+                      <Button
+                        variant="outlined"
+                        onClick={onReturn}
+                        fullWidth
+                        style={{ border: "4px solid", padding: "0px" }}
+                      >
+                        <Typography variant="h4">return</Typography>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      {/* conditional render to check if the logged in user is following this user profile */}
+                      {followedPosts.filter(
+                        (post) =>
+                          Number(post.followed_user_id) ===
+                          Number(thisUserId.id)
+                      ).length > 0 ? (
+                        <Button
+                          variant="outlined"
+                          onClick={onUnfollow}
+                          fullWidth
+                          style={{ border: "4px solid", padding: "0px" }}
+                        >
+                          <Typography variant="h4">unfollow</Typography>
                         </Button>
-                        {/* conditional render to check if the logged in user is following this user profile */}
-                        {followedPosts.filter(
-                          (post) =>
-                            Number(post.followed_user_id) ===
-                            Number(thisUserId.id)
-                        ).length > 0 ? (
-                          <Button variant="outlined" onClick={onUnfollow}>
-                            unfollow
-                          </Button>
-                        ) : (
-                          <Button variant="outlined" onClick={onFollow}>
-                            follow
-                          </Button>
-                        )}
-                      </ButtonGroup>
+                      ) : (
+                        <Button
+                          variant="outlined"
+                          onClick={onFollow}
+                          fullWidth
+                          style={{ border: "4px solid", padding: "0px" }}
+                        >
+                          <Typography variant="h4">follow</Typography>
+                        </Button>
+                      )}
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
-          <Typography variant="h4">posts</Typography>
+          <Typography variant="h4">{posts[0].username}'s recordings</Typography>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={2} justifyContent="center">
             {posts.map((post) => (
-              <Grid item xs={4} key={post.id}>
-                <Card>
+              <Grid item xs={4} key={post.id} align="center">
+                <Card
+                  className="postCard"
+                  style={{ backgroundColor: "var(--transparentWhite)" }}
+                >
                   <PostCardDisplay user={user} selected={post} />
                 </Card>
               </Grid>

@@ -1,28 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 function Nav() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    dispatch({ type: "SET_POSTS", payload: [] });
+  };
+
+  const onLogin = () => {
+    dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
+  };
+
   const user = useSelector((store) => store.user);
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
       <div>
         {/* ------------------UNPROTECTED LINKS------------------ */}
         {!user.id && (
           <>
             {/* // If there's no user, show login/registration links */}
-            <Link className="navLink" to="/login">
-              Login
-            </Link>
+            <button onClick={onLogin} className="navLink">
+              <img src="images/icons/login.svg" className="navImg" />
+            </button>
             <Link className="navLink" to="/explore">
-              Explore
+              <img src="images/icons/explore.svg" className="navImg" />
             </Link>
           </>
         )}
@@ -32,20 +42,21 @@ function Nav() {
         {user.id && (
           <>
             <Link className="navLink" to="/user">
-              Profile
+              <img src="images/icons/profile.svg" className="navImg" />
             </Link>
-            <Link className="navLink" to="/new">
-              New Post
-            </Link>
+
+            <button onClick={onLogout} className="navLink">
+              <img src="images/icons/logout.svg" className="navImg" />
+            </button>
+
             <Link className="navLink" to="/explore">
-              Explore
+              <img src="images/icons/explore.svg" className="navImg" />
             </Link>
-            <LogOutButton className="navLink" />
           </>
         )}
 
         <Link className="navLink" to="/about">
-          About
+          <img src="images/icons/about.svg" className="navImg" />
         </Link>
       </div>
     </div>

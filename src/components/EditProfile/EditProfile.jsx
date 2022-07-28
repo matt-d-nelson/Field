@@ -23,7 +23,7 @@ function EditProfile() {
   //---------------------LOCAL STATE---------------------//
   const [about, setAbout] = useState("");
   const [picture, setPicture] = useState("");
-  const [picturePath, setPicturePath] = useState("upload image");
+  const [picturePath, setPicturePath] = useState("(none selected)");
 
   //---------------------USE EFFECT---------------------//
   useEffect(() => {
@@ -80,7 +80,7 @@ function EditProfile() {
       fileExtension === "jpeg" ||
       fileExtension === "png" ||
       fileExtension === "gif" ||
-      fileExtension === "upload image"
+      fileExtension === "(none selected)"
     ) {
       return false;
     }
@@ -89,15 +89,14 @@ function EditProfile() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div style={{ padding: "20px", marginLeft: "5%", marginRight: "5%" }}>
+    <div style={{ paddingTop: "90px", marginLeft: "5%", marginRight: "5%" }}>
       <Typography variant="h3">Edit Profile</Typography>
-      <p>View 3.3</p>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={6}>
           <Grid container direction="column" spacing={1}>
             <Grid item align="right">
               <Avatar
-                style={{ height: "190px", width: "190px" }}
+                style={{ height: "183px", width: "192px", border: "4px solid" }}
                 variant="square"
                 src={user.image}
               >
@@ -105,15 +104,20 @@ function EditProfile() {
               </Avatar>
             </Grid>
             <Grid item align="right">
-              <Button component="label" variant="contained">
+              <Button
+                component="label"
+                variant="outlined"
+                style={{ width: "200px", border: "4px solid", padding: "0px" }}
+              >
                 <input
                   type="file"
                   name="picture"
                   onChange={onPictureChange}
                   hidden
                 />
-                <Typography>{picturePath}</Typography>
+                <Typography variant="h4">upload picture</Typography>
               </Button>
+              <Typography variant="h4">file: {picturePath}</Typography>
             </Grid>
           </Grid>
         </Grid>
@@ -121,18 +125,39 @@ function EditProfile() {
           <TextField
             label="about"
             variant="outlined"
+            inputProps={{ style: { fontSize: 30 } }}
             value={about}
             onChange={onAboutChange}
             multiline
-            minRows={10}
-            maxRows={10}
+            minRows={9}
+            maxRows={9}
           />
         </Grid>
         <Grid item xs={12} align="center">
-          <ButtonGroup>
-            <Button onClick={onCancel}>cancel</Button>
-            <Button onClick={onSubmit}>submit</Button>
-          </ButtonGroup>
+          <Button
+            onClick={onCancel}
+            style={{
+              border: "4px solid",
+              padding: "0px",
+              marginRight: "8px",
+              width: "200px",
+            }}
+            color="secondary"
+          >
+            <Typography variant="h4">cancel</Typography>
+          </Button>
+          <Button
+            onClick={onSubmit}
+            style={{
+              border: "4px solid",
+              padding: "0px",
+              marginLeft: "7px",
+              width: "200px",
+            }}
+            color="primary"
+          >
+            <Typography variant="h4">submit</Typography>
+          </Button>
         </Grid>
       </Grid>
     </div>

@@ -1,6 +1,6 @@
 //---------------------IMPORTS---------------------//
 // styling
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 // components
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -33,16 +33,33 @@ function FilterPosts() {
 
   //---------------------JSX RETURN---------------------//
   return (
-    <div>
-      <TextField
-        variant="filled"
-        placeholder="filter posts by tag"
-        onChange={updateTag}
-      />
-      <Button variant="outlined" onClick={onFilter}>
-        filter
-      </Button>
-    </div>
+    <Grid container spacing={1}>
+      <Grid item xs={8}>
+        <TextField
+          variant="filled"
+          placeholder="filter posts by tag"
+          onChange={updateTag}
+          fullWidth
+          inputProps={{ style: { fontSize: 30 } }}
+          label="filter"
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          variant="outlined"
+          onClick={onFilter}
+          fullWidth
+          style={{ border: "4px solid" }}
+        >
+          <Typography
+            variant="h4"
+            style={{ paddingBottom: "7px", paddingTop: "7px" }}
+          >
+            filter
+          </Typography>
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
 

@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "m3x6";
+  src: url("../../../public/fonts/m3x6.ttf") format("truetype");
+}
+
+:root {
+  --transparentGreen: rgb(83, 142, 82, 0.8);
+  --transparentWhite: rgb(255, 255, 255, 0.6);
+  --mainBlue: rgb(111, 177, 175);
+}
+
 html,
 body,
 #react-root {
@@ -5,9 +16,12 @@ body,
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "m3x6", sans-serif;
+  font-size: x-large;
   margin: 0px;
   text-align: center;
+  background-image: url("../../../public/images/background.png");
+  background-size: cover;
 }
 
 img {
@@ -24,60 +38,6 @@ Container
 }
 
 /* --------------------------------------------------------------------------------
-Button
--------------------------------------------------------------------------------- */
-
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-color: #014041;
-  border-width: 1px 1px 3px;
-  border-radius: 4px;
-  background-color: #00acb0;
-  color: #f8f8f8;
-  font-size: 1.1rem;
-  outline: 0;
-  cursor: pointer;
-}
-
-.btn_sizeMin {
-  min-height: 50px;
-  min-width: 100px;
-}
-
-.btn_sizeSm {
-  padding: 10px 15px;
-  font-size: 0.8rem;
-}
-
-.btn_sizeFull {
-  display: block;
-  width: 100%;
-}
-
-.btn:hover {
-  background-color: #008183;
-  text-decoration: none;
-}
-
-/* This line makes the "Register" and "Login" buttons look like links */
-.btn_asLink {
-  padding: 0;
-  border-width: 0;
-  border-bottom: 1px solid #444;
-  border-radius: 0;
-  background: none;
-  font: inherit;
-  color: #444;
-}
-
-.btn_asLink:hover {
-  background-color: transparent;
-  border-color: #008183;
-  color: #008183;
-}
-
-/* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
 
@@ -89,25 +49,46 @@ Alert
   background-color: #efefef;
   border-radius: 3px;
   color: #e01616;
-  font-size: 0.8rem;
+  font-size: 30;
 }
 
-/* --------------------------------------------------------------------------------
-Form Treatment
--------------------------------------------------------------------------------- */
-
-.formPanel {
-  box-sizing: border-box;
-  width: 400px;
-  max-width: 100%;
-  padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+/* explore style for filtering and searching map markers */
+.aboveMap {
+  z-index: 10;
+  position: absolute;
+  left: 30px;
+  top: 30px;
 }
 
-input {
-  margin: 5px;
-  margin-bottom: 10px;
+/* overwritten style for the google maps info window */
+.gm-style .gm-style-iw-c {
+  width: 450px !important;
+  height: 420px !important;
+  background-color: var(--transparentWhite) !important;
+  border-radius: 0px;
+}
+
+.gm-style-iw-d {
+  all: unset;
+}
+
+/* styling for post card display */
+.postHeader {
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+}
+
+.postHeader:hover {
+  transform: translate(7px, 7px);
+}
+
+.postCard {
+  min-width: 350px;
+  max-width: 450px;
+  min-height: 400px;
+}
+
+/* styling for profile information */
+.profileCard {
+  width: 450px;
 }

@@ -1,5 +1,6 @@
 //---------------------IMPORTS---------------------//
 // styling
+import mapStyle from "../MapLibraries/MapStyle";
 import {
   Avatar,
   Button,
@@ -29,7 +30,8 @@ import FilterPosts from "../FilterPosts/FilterPosts";
 
 //-------------------------------------- map container style as needed
 const mapContainerStyle = {
-  height: "600px",
+  width: "100vw",
+  height: "100vh",
 };
 //-------------------------------------- store in reducer
 const center = {
@@ -39,8 +41,9 @@ const center = {
 };
 
 const options = {
+  styles: mapStyle,
   disableDefaultUI: true,
-  zoomControl: true,
+  // zoomControl: true,
 };
 
 function MapView() {
@@ -94,8 +97,29 @@ function MapView() {
   //---------------------JSX RETURN---------------------//
   return (
     <div>
-      <FilterPosts />
-      <Search panTo={panTo} />
+      <div className="aboveMap">
+        <Card
+          style={{
+            maxWidth: "250px",
+            backgroundColor: "var(--transparentWhite)",
+            // border: "10px solid white",
+          }}
+        >
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <Typography variant="h3">Explore</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <FilterPosts />
+              </Grid>
+              <Grid item xs={12}>
+                <Search panTo={panTo} posX={"30px"} posY={"289px"} />
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={3}
@@ -108,6 +132,12 @@ function MapView() {
       >
         {posts.map((marker) => (
           <Marker
+            icon={{
+              url: "images/icons/marker.svg",
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(10, 15),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
             position={{ lat: Number(marker.lat), lng: Number(marker.lng) }}
             key={marker.lat}
             onClick={() => {
@@ -120,13 +150,17 @@ function MapView() {
           // info window is a gmaps component that can take one child and hold any components
           <InfoWindow
             position={{ lat: Number(selected.lat), lng: Number(selected.lng) }}
+            style={{ backgroundColor: "transparent" }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
             <div>
               <Card
-                style={{ boxShadow: "none", backgroundColor: "transparent" }}
+                style={{
+                  boxShadow: "none",
+                  backgroundColor: "transparent",
+                }}
               >
                 <PostCardDisplay user={user} selected={selected} />
               </Card>

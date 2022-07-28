@@ -1,3 +1,6 @@
+//---------------------IMPORTS---------------------//
+// libraries
+import { TextField } from "@material-ui/core";
 import {
   Combobox,
   ComboboxInput,
@@ -11,7 +14,8 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
-function MapSearch({ panTo }) {
+//---------------------IMPORTS---------------------//
+function MapSearch(props) {
   // deconstructed object returned from usePlacesAutocoplete
   const {
     ready,
@@ -33,7 +37,7 @@ function MapSearch({ panTo }) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
-      panTo({ lat, lng });
+      props.panTo({ lat, lng });
       console.log(lat, lng);
     } catch (err) {
       console.log(err);
@@ -45,16 +49,37 @@ function MapSearch({ panTo }) {
     setValue(event.target.value);
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
-    <div style={{ zIndex: 10 }}>
+    <div>
+      <TextField
+        onChange={setAutocompleteVal}
+        disabled={!ready}
+        value={value}
+        fullWidth
+        variant="filled"
+        placeholder="search location"
+        label="search"
+        inputProps={{ style: { fontSize: 30 } }}
+      />
       <Combobox onSelect={panToAddress}>
         <ComboboxInput
           value={value}
           onChange={setAutocompleteVal}
           disabled={!ready}
-          placeholder="search address"
+          hidden
         />
-        <ComboboxPopover>
+        <ComboboxPopover
+          style={{
+            width: "250px",
+            position: "absolute",
+            backgroundColor: "var(--transparentWhite)",
+            border: "none",
+            zIndex: 10,
+            top: props.posY,
+            left: props.posX,
+          }}
+        >
           <ComboboxList>
             {status === "OK" &&
               data.map(({ place_id, description }) => (
