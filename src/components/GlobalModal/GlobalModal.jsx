@@ -46,18 +46,41 @@ function GlobalModal(props) {
     case "loading":
       return (
         <Dialog open={modalData.open}>
-          <DialogTitle>Please wait</DialogTitle>
-          <DialogContent>{modalData.message}</DialogContent>
+          <div style={{ width: "400px" }}>
+            <DialogTitle>
+              <Typography variant="h3">loading...</Typography>
+            </DialogTitle>
+            <DialogContent>
+              <img src="images/modal/spinningCompass.gif" />
+              <Typography variant="h4">{modalData.message}</Typography>
+            </DialogContent>
+          </div>
         </Dialog>
       );
     case "error":
       return (
         <Dialog open={modalData.open}>
-          <DialogTitle>Error</DialogTitle>
-          <DialogContent>{modalData.message}</DialogContent>
-          <DialogActions>
-            <Button onClick={onReturn}>return</Button>
-          </DialogActions>
+          <div style={{ width: "400px" }}>
+            <DialogTitle>
+              <Typography variant="h3">error</Typography>
+            </DialogTitle>
+            <DialogContent>
+              <img src="images/modal/error.png" />
+              <Typography variant="h4">{modalData.message}</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={onReturn}
+                style={{
+                  border: "4px solid",
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                }}
+              >
+                <Typography variant="h4">return</Typography>
+              </Button>
+            </DialogActions>
+          </div>
         </Dialog>
       );
     case "success":
