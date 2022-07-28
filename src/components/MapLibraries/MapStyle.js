@@ -67,7 +67,7 @@ const mapStyle = [
     elementType: "labels.text",
     stylers: [
       {
-        visibility: "simplified",
+        visibility: "off",
       },
     ],
   },
@@ -91,7 +91,7 @@ const mapStyle = [
         visibility: "simplified",
       },
       {
-        color: "#ff0000",
+        color: "#4a5a39",
       },
     ],
   },
