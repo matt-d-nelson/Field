@@ -84,32 +84,30 @@ input {
   width: 450px !important;
   height: 420px !important;
   background-color: var(--transparentWhite) !important;
-  background-image: url("/public/images/info-export.png");
-  background-size: 100%;
   border-radius: 0px;
+}
+
+.gm-style-iw-d {
+  all: unset;
 }
 
 /* styling for post card display */
 .postHeader {
   text-align: left;
-  background-size: 80%;
   transition: all 0.2s ease-in-out;
 }
 
 .postHeader:hover {
-  background-color: white;
+  transform: translate(7px, 7px);
 }
 
 .postCard {
   min-width: 350px;
   max-width: 450px;
   min-height: 400px;
-  border: 8px solid white;
 }
 
 /* styling for profile information */
 .profileCard {
   width: 450px;
-
-  /* border: 8px solid white; */
 }

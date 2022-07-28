@@ -63,8 +63,11 @@ function PostCardDisplay(props) {
                   {/* navigate to edit window on click */}
                   <Button
                     onClick={onEdit}
-                    fullWidth
-                    style={{ border: "4px solid", padding: "0px" }}
+                    style={{
+                      border: "4px solid",
+                      padding: "0px",
+                      width: "150px",
+                    }}
                   >
                     <Typography variant="h5">edit this post</Typography>
                   </Button>

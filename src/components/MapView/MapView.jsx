@@ -102,7 +102,7 @@ function MapView() {
           style={{
             maxWidth: "250px",
             backgroundColor: "var(--transparentWhite)",
-            border: "10px solid white",
+            // border: "10px solid white",
           }}
         >
           <CardContent>
@@ -114,7 +114,7 @@ function MapView() {
                 <FilterPosts />
               </Grid>
               <Grid item xs={12}>
-                <Search panTo={panTo} posX={"40px"} posY={"308px"} />
+                <Search panTo={panTo} posX={"30px"} posY={"289px"} />
               </Grid>
             </Grid>
           </CardContent>
