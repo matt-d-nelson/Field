@@ -1,3 +1,5 @@
+//---------------------IMPORTS---------------------//
+// styling
 import {
   Button,
   ButtonGroup,
@@ -5,15 +7,20 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+// libraries
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegisterForm() {
+  //---------------------LOCAL STATE---------------------//
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  //---------------------IMPORTED OBJECTS---------------------//
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
+  //---------------------EVENT HANDLERS---------------------//
   const registerUser = (event) => {
     event.preventDefault();
 
@@ -35,6 +42,7 @@ function RegisterForm() {
     dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
     <form className="formPanel" onSubmit={registerUser}>
       <Typography variant="h3">register</Typography>

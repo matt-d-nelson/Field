@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+//---------------------IMPORTS---------------------//
+// libraries
 import { useHistory } from "react-router-dom";
-
-// CUSTOM COMPONENTS
-import { Button, Card, CardMedia, Grid, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
+// components
+import { Button, Card, CardMedia, Grid, Typography } from "@material-ui/core";
+
 function LandingPage() {
+  //---------------------IMPORTED OBJECTS---------------------//
   const history = useHistory();
   const dispatch = useDispatch();
 
+  //---------------------EVENT HANDLERS---------------------//
   const onLogin = (event) => {
     dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
   };
@@ -21,6 +24,7 @@ function LandingPage() {
     history.push("/explore");
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
     <div style={{ marginLeft: "5%", marginRight: "5%", paddingTop: "40px" }}>
       <Grid container spacing={1}>

@@ -86,22 +86,65 @@ function GlobalModal(props) {
     case "success":
       return (
         <Dialog open={modalData.open}>
-          <DialogTitle>Success!</DialogTitle>
-          <DialogContent>{modalData.message}</DialogContent>
-          <DialogActions>
-            <Button onClick={onReturn}>return</Button>
-          </DialogActions>
+          <div style={{ width: "400px" }}>
+            <DialogTitle>
+              <Typography variant="h3">success!</Typography>
+            </DialogTitle>
+            <DialogContent>
+              <img src="images/modal/success.png" />
+              <Typography variant="h4">{modalData.message}</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={onReturn}
+                style={{
+                  border: "4px solid",
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                }}
+              >
+                <Typography variant="h4">return</Typography>
+              </Button>
+            </DialogActions>
+          </div>
         </Dialog>
       );
     case "confirm":
       return (
         <Dialog open={modalData.open}>
-          <DialogTitle>Are you sure?</DialogTitle>
-          <DialogContent>{modalData.message}</DialogContent>
-          <DialogActions>
-            <Button onClick={onReturn}>cancel</Button>
-            <Button onClick={onConfirm}>confirm</Button>
-          </DialogActions>
+          <div style={{ width: "400px" }}>
+            <DialogTitle>
+              <Typography variant="h3">are you sure?</Typography>
+            </DialogTitle>
+            <DialogContent>
+              <img src="images/modal/confirm.png" />
+              <Typography variant="h4">{modalData.message}</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={onReturn}
+                style={{
+                  border: "4px solid",
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                }}
+                color="primary"
+              >
+                <Typography variant="h4">cancel</Typography>
+              </Button>
+              <Button
+                onClick={onConfirm}
+                style={{
+                  border: "4px solid",
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
+                }}
+                color="secondary"
+              >
+                <Typography variant="h4">confirm</Typography>
+              </Button>
+            </DialogActions>
+          </div>
         </Dialog>
       );
     case "login":

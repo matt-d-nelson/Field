@@ -7,7 +7,7 @@ import React from "react";
 
 function AboutPage() {
   return (
-    <div className="container">
+    <div style={{ paddingTop: "70px" }}>
       <div>
         <p>
           About Page, unprotected, flesh out with info about app and tech used.
