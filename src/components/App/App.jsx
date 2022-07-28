@@ -44,7 +44,6 @@ function App() {
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
-
           {/* ------------------UNPROTECTED ROUTES------------------ */}
           <Route exact path="/about">
             <AboutPage />

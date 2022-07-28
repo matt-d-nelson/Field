@@ -286,14 +286,25 @@ router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
   console.log("DELETE", req.params.id, req.params.userid);
   console.log(req.user.id);
 
-  const deletePostId = [req.params.id];
-  const deletePostQuery = `DELETE FROM "post" WHERE id = $1;`;
-
   if (req.user.id === Number(req.params.userid)) {
+    // DELETE ASSOCIATED TAGS FROM TAG TABLE
+    const deletePostTagsId = [req.params.id];
+    const deletePostTagsQuery = `DELETE FROM "tag" WHERE "tag".post_id = $1;`;
     pool
-      .query(deletePostQuery, deletePostId)
+      .query(deletePostTagsQuery, deletePostTagsId)
       .then((result) => {
-        res.sendStatus(200);
+        // DELETE POST FROM POST TABLE
+        const deletePostId = [req.params.id];
+        const deletePostQuery = `DELETE FROM "post" WHERE id = $1;`;
+        pool
+          .query(deletePostQuery, deletePostId)
+          .then((result) => {
+            res.sendStatus(200);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
         console.log(err);
