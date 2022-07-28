@@ -14,7 +14,7 @@ function LandingPage() {
   };
 
   const onRegister = () => {
-    history.push("/registration");
+    dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "register" } });
   };
 
   const onExplore = () => {

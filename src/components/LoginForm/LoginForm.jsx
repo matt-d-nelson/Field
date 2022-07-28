@@ -32,7 +32,10 @@ function LoginForm() {
   }; // end login
 
   const onRegister = () => {
-    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({
+      type: "OPEN_MODAL",
+      payload: { open: true, type: "register" },
+    });
   };
 
   const onCancel = () => {
@@ -112,7 +115,7 @@ function LoginForm() {
             style={{ color: "var(--mainBlue)", cursor: "pointer" }}
             onClick={onRegister}
           >
-            Register an account
+            register an account here.
           </Typography>
         </Grid>
       </Grid>

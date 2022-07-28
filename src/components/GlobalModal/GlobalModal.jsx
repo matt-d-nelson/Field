@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
 
 function GlobalModal(props) {
   //---------------------IMPORTED OBJECTS---------------------//
@@ -85,6 +86,14 @@ function GlobalModal(props) {
         <Dialog open={modalData.open}>
           <DialogContent>
             <LoginForm />
+          </DialogContent>
+        </Dialog>
+      );
+    case "register":
+      return (
+        <Dialog open={modalData.open}>
+          <DialogContent>
+            <RegisterForm />
           </DialogContent>
         </Dialog>
       );

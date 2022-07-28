@@ -1,3 +1,10 @@
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,42 +26,92 @@ function RegisterForm() {
     });
   }; // end registerUser
 
+  const onCancel = () => {
+    dispatch({ type: "CLOSE_MODAL" });
+    dispatch({ type: "CLEAR_LOGIN_ERROR" });
+  };
+
+  const onLogin = () => {
+    dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
+  };
+
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      <p>View 1.1</p>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
+      <Typography variant="h3">register</Typography>
+
+      <Grid container spacing={2} style={{ width: "400px" }}>
+        <Grid item xs={12}>
+          {errors.registrationMessage && (
+            <h3 className="alert" role="alert">
+              {errors.registrationMessage}
+            </h3>
+          )}
+        </Grid>
+
+        <Grid item xs={12}>
+          <label htmlFor="username">
+            <TextField
+              fullWidth
+              inputProps={{ style: { fontSize: 30 } }}
+              label="username"
+              type="text"
+              name="username"
+              required
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </label>
+        </Grid>
+        <Grid item xs={12}>
+          <label htmlFor="password">
+            <TextField
+              fullWidth
+              inputProps={{ style: { fontSize: 30 } }}
+              label="password"
+              type="password"
+              name="password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </label>
+        </Grid>
+        <Grid item xs={12}>
+          <ButtonGroup fullWidth>
+            <Button
+              style={{
+                border: "4px solid",
+                padding: "0px",
+                marginRight: "10px",
+              }}
+              onClick={onCancel}
+            >
+              <Typography variant="h4">cancel</Typography>
+            </Button>
+            <Button
+              component="label"
+              style={{
+                border: "4px solid",
+                padding: "0px",
+                marginLeft: "10px",
+              }}
+            >
+              <input type="submit" name="submit" value="Register" hidden />
+              <Typography variant="h4">login</Typography>
+            </Button>
+          </ButtonGroup>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h5">already have an account? </Typography>
+          <Typography
+            variant="h5"
+            style={{ color: "var(--mainBlue)", cursor: "pointer" }}
+            onClick={onLogin}
+          >
+            login here.
+          </Typography>
+        </Grid>
+      </Grid>
     </form>
   );
 }
