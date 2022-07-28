@@ -175,10 +175,10 @@ function NewPost() {
               />
             </Grid>
             <Grid container justifyContent="space-evenly">
-              <Grid item sx={6}>
+              <Grid item xs={6}>
                 <Typography variant="h5">file: {audioPath}</Typography>
               </Grid>
-              <Grid item sx={6}>
+              <Grid item xs={6}>
                 <Typography variant="h5">file: {picturePath}</Typography>
               </Grid>
             </Grid>

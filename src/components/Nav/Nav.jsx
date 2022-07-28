@@ -15,6 +15,10 @@ function Nav() {
     dispatch({ type: "SET_POSTS", payload: [] });
   };
 
+  const onLogin = () => {
+    dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
+  };
+
   const user = useSelector((store) => store.user);
 
   return (
@@ -24,9 +28,9 @@ function Nav() {
         {!user.id && (
           <>
             {/* // If there's no user, show login/registration links */}
-            <Link className="navLink" to="/login">
+            <button onClick={onLogin} className="navLink">
               <img src="images/icons/login.svg" className="navImg" />
-            </Link>
+            </button>
             <Link className="navLink" to="/explore">
               <img src="images/icons/explore.svg" className="navImg" />
             </Link>

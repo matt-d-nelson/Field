@@ -3,13 +3,14 @@ import { useHistory } from "react-router-dom";
 
 // CUSTOM COMPONENTS
 import { Button, Card, CardMedia, Grid, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 function LandingPage() {
-  const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const onLogin = (event) => {
-    history.push("/login");
+    dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
   };
 
   const onRegister = () => {

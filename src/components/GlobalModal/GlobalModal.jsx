@@ -12,6 +12,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import LoginForm from "../LoginForm/LoginForm";
 
 function GlobalModal(props) {
   //---------------------IMPORTED OBJECTS---------------------//
@@ -77,6 +78,14 @@ function GlobalModal(props) {
             <Button onClick={onReturn}>cancel</Button>
             <Button onClick={onConfirm}>confirm</Button>
           </DialogActions>
+        </Dialog>
+      );
+    case "login":
+      return (
+        <Dialog open={modalData.open}>
+          <DialogContent>
+            <LoginForm />
+          </DialogContent>
         </Dialog>
       );
     default:
