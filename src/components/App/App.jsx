@@ -18,12 +18,12 @@ import UserProfile from "../UserProfile/UserProfile";
 import LandingPage from "../LandingPage/LandingPage";
 
 import "./App.css";
-import Explore from "../Explore/Explore";
 import NewPost from "../NewPost/NewPost";
 import GlobalModal from "../GlobalModal/GlobalModal";
 import EditPost from "../EditPost/EditPost";
 import EditProfile from "../EditProfile/EditProfile";
 import ForeignUserProfile from "../ForeignUserProfile/ForeignUserProfile";
+import MapView from "../MapView/MapView";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function App() {
             <AboutPage />
           </Route>
           <Route exact path="/explore">
-            <Explore />
+            <MapView />
           </Route>
           <Route exact path="/foreign/:id">
             <ForeignUserProfile />
