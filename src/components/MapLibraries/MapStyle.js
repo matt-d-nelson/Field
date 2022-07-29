@@ -1,3 +1,4 @@
+// custom map style JSON
 const mapStyle = [
   {
     featureType: "administrative",

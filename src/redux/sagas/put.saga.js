@@ -11,7 +11,7 @@ function* updatePost(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Updating post..." },
+      payload: { open: true, type: "loading", message: "updating post..." },
     });
     // delay sending request so that the loading modal is displayed for at least a moment
     yield delay(350);
@@ -27,7 +27,7 @@ function* updatePost(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your post has been updated.",
+        message: "your post has been updated.",
         history: "/user",
       },
     });
@@ -39,7 +39,7 @@ function* updatePost(action) {
       payload: {
         open: true,
         type: "error",
-        message: "Your post was not updated.",
+        message: "your post was not updated.",
       },
     });
   }
@@ -49,7 +49,7 @@ function* updateProfile(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Updating profile..." },
+      payload: { open: true, type: "loading", message: "updating profile..." },
     });
     // delay sending request so that the loading modal is displayed for at least a moment
     yield delay(350);
@@ -65,7 +65,7 @@ function* updateProfile(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your profile has been updated.",
+        message: "your profile has been updated.",
         history: "/user",
         returnDispatch: { type: "FETCH_USER" },
       },
@@ -79,7 +79,7 @@ function* updateProfile(action) {
       payload: {
         open: true,
         type: "error",
-        message: "Your profile was not updated.",
+        message: "your profile was not updated.",
       },
     });
   }
@@ -90,7 +90,7 @@ function* updateFollowing(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Updating profile..." },
+      payload: { open: true, type: "loading", message: "updating profile..." },
     });
     // delay sending request so that the loading modal is displayed for at least a moment
     yield delay(350);
@@ -105,7 +105,7 @@ function* updateFollowing(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your feed has been updated.",
+        message: "your feed has been updated.",
       },
     });
     yield put({ type: "GET_FOLLOWED_USER_POSTS" });
@@ -116,7 +116,7 @@ function* updateFollowing(action) {
       payload: {
         open: true,
         type: "error",
-        message: "Unable to follow user",
+        message: "unable to follow user",
       },
     });
   }

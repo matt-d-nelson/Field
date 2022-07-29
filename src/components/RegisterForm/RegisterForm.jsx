@@ -31,7 +31,7 @@ function RegisterForm() {
         password: password,
       },
     });
-  }; // end registerUser
+  };
 
   const onCancel = () => {
     dispatch({ type: "CLOSE_MODAL" });
@@ -105,7 +105,7 @@ function RegisterForm() {
               }}
             >
               <input type="submit" name="submit" value="Register" hidden />
-              <Typography variant="h4">login</Typography>
+              <Typography variant="h4">register</Typography>
             </Button>
           </ButtonGroup>
         </Grid>

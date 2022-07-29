@@ -10,7 +10,7 @@ function* deletePost(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Deleting post..." },
+      payload: { open: true, type: "loading", message: "deleting post..." },
     });
     yield delay(350);
     const res = yield axios({
@@ -22,7 +22,7 @@ function* deletePost(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your post has been obliterated.",
+        message: "your post has been obliterated.",
         history: "/user",
       },
     });
@@ -33,7 +33,7 @@ function* deletePost(action) {
       payload: {
         open: true,
         type: "error",
-        message: "Your post was not deleted.",
+        message: "your post was not deleted.",
       },
     });
   }

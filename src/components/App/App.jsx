@@ -1,3 +1,5 @@
+//---------------------IMPORTS---------------------//
+// libraries
 import React, { useEffect } from "react";
 import {
   HashRouter as Router,
@@ -5,35 +7,35 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
+// styling
+import "./App.css";
+// components
 import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
 import UserProfile from "../UserProfile/UserProfile";
 import LandingPage from "../LandingPage/LandingPage";
-
-import "./App.css";
-import Explore from "../Explore/Explore";
 import NewPost from "../NewPost/NewPost";
 import GlobalModal from "../GlobalModal/GlobalModal";
 import EditPost from "../EditPost/EditPost";
 import EditProfile from "../EditProfile/EditProfile";
 import ForeignUserProfile from "../ForeignUserProfile/ForeignUserProfile";
+import MapView from "../MapView/MapView";
 
 function App() {
+  //---------------------IMPORTED OBJECTS---------------------//
   const dispatch = useDispatch();
 
+  //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
 
+  //---------------------ON MOUNT---------------------//
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
+  //---------------------JSX RETURN---------------------//
   return (
     <Router>
       <div>
@@ -49,7 +51,7 @@ function App() {
             <AboutPage />
           </Route>
           <Route exact path="/explore">
-            <Explore />
+            <MapView />
           </Route>
           <Route exact path="/foreign/:id">
             <ForeignUserProfile />
@@ -87,7 +89,6 @@ function App() {
             <h1 style={{ paddingTop: "70px" }}>404: page not found</h1>
           </Route>
         </Switch>
-        {/* <Footer /> */}
       </div>
     </Router>
   );

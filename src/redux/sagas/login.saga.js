@@ -23,7 +23,7 @@ function* loginUser(action) {
     // open loading modal after login attempt in case of post error
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Logging in..." },
+      payload: { open: true, type: "loading", message: "logging in..." },
     });
     yield delay(350);
 
@@ -54,7 +54,7 @@ function* logoutUser(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Logging out..." },
+      payload: { open: true, type: "loading", message: "logging out..." },
     });
     yield delay(350);
     const config = {
@@ -79,7 +79,7 @@ function* logoutUser(action) {
       payload: {
         open: true,
         type: "success",
-        message: "You have been logged out.",
+        message: "you have been logged out.",
         history: "/home",
       },
     });

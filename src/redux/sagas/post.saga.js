@@ -10,7 +10,7 @@ function* addPost(action) {
   try {
     yield put({
       type: "OPEN_MODAL",
-      payload: { open: true, type: "loading", message: "Creating post..." },
+      payload: { open: true, type: "loading", message: "creating post..." },
     });
     // delay sending request so that the loading modal is displayed for at least a moment
     yield delay(350);
@@ -26,7 +26,7 @@ function* addPost(action) {
       payload: {
         open: true,
         type: "success",
-        message: "Your post has been uploaded.",
+        message: "your post has been uploaded.",
         history: "/user",
       },
     });
@@ -38,7 +38,7 @@ function* addPost(action) {
       payload: {
         open: true,
         type: "error",
-        message: "Your post was not uploaded.",
+        message: "your post was not uploaded.",
       },
     });
   }

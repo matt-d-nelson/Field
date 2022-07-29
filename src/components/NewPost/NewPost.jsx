@@ -80,7 +80,7 @@ function NewPost() {
           open: true,
           type: "error",
           message:
-            "Please select a location on the map, input a title, and upload an audio and image file.",
+            "please select a location on the map, input a title, and upload an audio and image file.",
         },
       });
     } else {

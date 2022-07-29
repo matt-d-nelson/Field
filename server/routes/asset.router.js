@@ -1,7 +1,9 @@
+//---------------------IMPORTS---------------------//
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 const upload = require("../modules/multer");
+
 const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
@@ -129,8 +131,8 @@ router.post(
       req.body.title,
       req.body.description,
       // slice to remove "public/" from path
-      req.files.audio[0].path.slice(7),
-      req.files.picture[0].path.slice(7),
+      req.files.audio[0].path,
+      req.files.picture[0].path,
     ];
     console.log(newPostValues);
 
@@ -237,7 +239,7 @@ router.put(
     // set query based on if a picture was uploaded
     if (req.body.picture != "") {
       queryString = `UPDATE "user" SET image = $1, about = $2 WHERE id = $3;`;
-      queryValues = [req.file.path.slice(7), req.body.about, req.body.id];
+      queryValues = [req.file.path, req.body.about, req.body.id];
     } else {
       queryString = `UPDATE "user" SET about = $1 WHERE id = $2;`;
       queryValues = [req.body.about, req.body.id];
@@ -318,21 +320,24 @@ router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
 //---------------------HELPER FUNCTIONS---------------------//
 
 function generateUpdateQuery(requestObject, requestFiles) {
+  // declare values array with request vals
   let queryValues = [
     requestObject.title,
     requestObject.description,
     requestObject.lat,
     requestObject.lng,
   ];
+  // declare indexCount var that gets added to the query string and increments if audio or a picture was uploaded
   let indexCount = 0;
+  // declare base query string
   let queryString = `UPDATE "post" SET title = $1, description = $2, lat = $3, lng = $4`;
-  if (requestObject.picture != "") {
-    queryValues.push(requestFiles.picture[0].path.slice(7));
+  if (requestFiles.picture != undefined) {
+    queryValues.push(requestFiles.picture[0].path);
     queryString += `, image = $5`;
     indexCount++;
   }
-  if (requestObject.audio != "") {
-    queryValues.push(requestFiles.audio[0].path.slice(7));
+  if (requestFiles.audio != undefined) {
+    queryValues.push(requestFiles.audio[0].path);
     queryString += `, audio = $${5 + indexCount}`;
     indexCount++;
   }

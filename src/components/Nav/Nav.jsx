@@ -1,15 +1,18 @@
+//---------------------IMPORTS---------------------//
+// styling
+import "./Nav.css";
+// libraries
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
-import "./Nav.css";
 import { useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 function Nav() {
+  //---------------------IMPORTED OBJECTS---------------------//
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //---------------------EVENT HANDLERS---------------------//
   const onLogout = () => {
     dispatch({ type: "LOGOUT" });
     dispatch({ type: "SET_POSTS", payload: [] });
@@ -19,6 +22,7 @@ function Nav() {
     dispatch({ type: "OPEN_MODAL", payload: { open: true, type: "login" } });
   };
 
+  //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
 
   return (
@@ -55,6 +59,7 @@ function Nav() {
           </>
         )}
 
+        {/* ------------------GLOBAL LINKS------------------ */}
         <Link className="navLink" to="/about">
           <img src="images/icons/about.svg" className="navImg" />
         </Link>

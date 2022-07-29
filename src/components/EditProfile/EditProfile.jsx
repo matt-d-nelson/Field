@@ -1,12 +1,6 @@
-import {
-  Avatar,
-  Button,
-  ButtonGroup,
-  Card,
-  Grid,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+//---------------------IMPORTS---------------------//
+// styling
+import { Avatar, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -27,7 +21,7 @@ function EditProfile() {
 
   //---------------------USE EFFECT---------------------//
   useEffect(() => {
-    if (user != {}) {
+    if (user != {} && user.about != null) {
       setAbout(user.about);
     }
   }, [user]);
@@ -53,7 +47,7 @@ function EditProfile() {
         payload: {
           open: true,
           type: "error",
-          message: "Please upload a supported image type.",
+          message: "please upload a supported image type.",
         },
       });
     } else {

@@ -3,12 +3,10 @@
 import {
   Avatar,
   Button,
-  ButtonGroup,
   Card,
   CardContent,
   CardHeader,
   Grid,
-  styled,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -62,13 +60,14 @@ function ForeignUserProfile() {
         payload: {
           open: true,
           type: "error",
-          message: `Please log in or create an accout to follow ${posts[0].username}`,
+          message: `please log in or create an accout to follow ${posts[0].username}`,
         },
       });
     }
   };
 
   const onUnfollow = () => {
+    // dispatch put saga to remove follow to junction table
     dispatch({
       type: "UPDATE_FOLLOWING",
       payload: { idToFollow: thisUserId.id, following: false },

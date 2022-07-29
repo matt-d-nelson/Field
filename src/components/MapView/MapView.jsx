@@ -1,16 +1,7 @@
 //---------------------IMPORTS---------------------//
 // styling
 import mapStyle from "../MapLibraries/MapStyle";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 // libraries
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -28,12 +19,12 @@ import Search from "../MapSearch/MapSearch";
 import PostCardDisplay from "../PostCardDisplay/PostCardDisplay";
 import FilterPosts from "../FilterPosts/FilterPosts";
 
-//-------------------------------------- map container style as needed
+// full page container
 const mapContainerStyle = {
   width: "100vw",
   height: "100vh",
 };
-//-------------------------------------- store in reducer
+// default center on my home in st joseph <3
 const center = {
   // latitude and longitude
   lat: 45.56477,

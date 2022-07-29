@@ -17,7 +17,7 @@ function* getPosts() {
       payload: {
         open: true,
         type: "error",
-        message: "We are unable to load any posts",
+        message: "we are unable to load any posts",
       },
     });
   }
@@ -34,7 +34,7 @@ function* getUserPosts(action) {
       payload: {
         open: true,
         type: "error",
-        message: "We are unable to load any posts",
+        message: "we are unable to load any posts",
       },
     });
   }
@@ -52,7 +52,7 @@ function* getFollowedUserPosts() {
       payload: {
         open: true,
         type: "error",
-        message: "We are unable to load followed user posts",
+        message: "we are unable to load followed user posts",
       },
     });
   }
@@ -72,7 +72,7 @@ function* getFilteredPosts(action) {
         payload: {
           open: true,
           type: "error",
-          message: "We couldn't find any posts with that tag.",
+          message: "we couldn't find any posts with that tag.",
         },
       });
     }
@@ -83,7 +83,7 @@ function* getFilteredPosts(action) {
       payload: {
         open: true,
         type: "error",
-        message: "We are unable filter posts",
+        message: "we are unable filter posts",
       },
     });
   }
@@ -101,7 +101,7 @@ function* getPostTags(action) {
       payload: {
         open: true,
         type: "error",
-        message: "We are unable load this post's tags.",
+        message: "we are unable load this post's tags.",
       },
     });
   }

@@ -102,20 +102,10 @@ function EditPost() {
           open: true,
           type: "error",
           message:
-            "Please input a title and ensure that any new audio and/or image files are of a supported file type.",
+            "please input a title and ensure that any new audio and/or image files are of a supported file type.",
         },
       });
     } else {
-      // temp for input verification
-      const updatedPostTemp = {
-        user_id: userData.id,
-        title: title,
-        description: description,
-        tags: tags,
-        lat: markers[0].lat,
-        lng: markers[0].lng,
-      };
-      console.log(updatedPostTemp);
       // gather inputs as form data
       const updatedPost = new FormData();
       updatedPost.append("id", thisPost.id);
@@ -138,7 +128,7 @@ function EditPost() {
       payload: {
         open: true,
         type: "confirm",
-        message: `Once deleted, ${thisPost.title} will be gone forever`,
+        message: `once deleted, ${thisPost.title} will be gone forever`,
         confirmDispatch: {
           type: "DELETE_POST",
           payload: { postId: thisPostId.id, userId: thisPost.user_id },
@@ -149,6 +139,7 @@ function EditPost() {
 
   //---------------------HELPER FUNCTIONS---------------------//
   const verifyAudio = (audioToVerify) => {
+    // ensure there is not a new file uploaded or that the new file is a supported type
     const splitAudio = audioToVerify.split(".");
     const fileExtension = splitAudio[splitAudio.length - 1].toLowerCase();
     if (
@@ -162,6 +153,7 @@ function EditPost() {
   };
 
   const verifyPicture = (imageToVerify) => {
+    // ensure there is not a new file uploaded or that the new file is a supported type
     const splitImage = imageToVerify.split(".");
     const fileExtension = splitImage[splitImage.length - 1].toLowerCase();
     if (
@@ -297,7 +289,6 @@ function EditPost() {
                   marginLeft: "7px",
                   width: "200px",
                 }}
-                color="info"
               >
                 <Typography variant="h4">cancel</Typography>
               </Button>
@@ -330,9 +321,7 @@ function EditPost() {
             </Grid>
           </Grid>
         </div>
-      ) : (
-        <p>loading...</p>
-      )}
+      ) : null}
     </div>
   );
 }

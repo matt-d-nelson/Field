@@ -11,10 +11,8 @@ import mapStyle from "../MapLibraries/MapStyle";
 // map container
 const mapContainerStyle = {
   height: "400px",
-  //   width: "400px",
-  //   height: "300px",
 };
-
+// map options
 const options = {
   styles: mapStyle,
   disableDefaultUI: true,
@@ -23,7 +21,6 @@ const options = {
 
 function MapCreate(props) {
   //---------------------LOCAL STATE---------------------//
-
   const [center, setCenter] = useState({
     // latitude and longitude
     lat: 45.56477,
@@ -32,6 +29,8 @@ function MapCreate(props) {
 
   //---------------------USE EFFECT---------------------//
   useEffect(() => {
+    // set the center on mount if loc is passed in as a prop
+    // currently used for editing posts
     if (props.loc != undefined) {
       setCenter(props.loc);
     }
@@ -44,12 +43,14 @@ function MapCreate(props) {
     libraries,
   });
 
-  // useRef for map to avoid rerenders
+  // useRef for map to avoid rerendering the GoogleMap component
   const mapRef = useRef();
+  // set first instance of GoogleMap component to the current mapRef
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
+  // useCallback to save unchanging function to memory
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(12);
@@ -64,6 +65,7 @@ function MapCreate(props) {
   if (loadError) return "Error loading map";
   if (!isLoaded) return "Loading map";
 
+  //---------------------JSX RETURN---------------------//
   return (
     <div>
       <MapSearch panTo={panTo} posX={"40px"} posY={"230px"} />
