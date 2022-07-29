@@ -106,16 +106,6 @@ function EditPost() {
         },
       });
     } else {
-      // temp for input verification
-      const updatedPostTemp = {
-        user_id: userData.id,
-        title: title,
-        description: description,
-        tags: tags,
-        lat: markers[0].lat,
-        lng: markers[0].lng,
-      };
-      console.log(updatedPostTemp);
       // gather inputs as form data
       const updatedPost = new FormData();
       updatedPost.append("id", thisPost.id);
@@ -149,6 +139,7 @@ function EditPost() {
 
   //---------------------HELPER FUNCTIONS---------------------//
   const verifyAudio = (audioToVerify) => {
+    // ensure there is not a new file uploaded or that the new file is a supported type
     const splitAudio = audioToVerify.split(".");
     const fileExtension = splitAudio[splitAudio.length - 1].toLowerCase();
     if (
@@ -162,6 +153,7 @@ function EditPost() {
   };
 
   const verifyPicture = (imageToVerify) => {
+    // ensure there is not a new file uploaded or that the new file is a supported type
     const splitImage = imageToVerify.split(".");
     const fileExtension = splitImage[splitImage.length - 1].toLowerCase();
     if (
@@ -329,9 +321,7 @@ function EditPost() {
             </Grid>
           </Grid>
         </div>
-      ) : (
-        <p>loading...</p>
-      )}
+      ) : null}
     </div>
   );
 }

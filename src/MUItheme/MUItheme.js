@@ -1,3 +1,5 @@
+// file to customize MUI component's default properties
+
 import { createTheme } from "@material-ui/core";
 
 const theme = createTheme({

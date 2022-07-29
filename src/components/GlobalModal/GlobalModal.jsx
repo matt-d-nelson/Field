@@ -1,3 +1,12 @@
+// this is a dialog component that is global in scope
+// it is controlled by a reducer and has a variable return based on dispatch type
+
+// KNOWN ISSUE: Material UI will throw the following error when this component is open:
+// "validateDOMNesting(...): <h3> cannot appear as a child of <h2>."
+// this is due to putting an h3 Typography component within a DialogTitle component
+// potential fix: find another way to adjust DialogTitle font size without Typography component
+// low priority
+
 //---------------------IMPORTS---------------------//
 // libraries
 import { useDispatch } from "react-redux";

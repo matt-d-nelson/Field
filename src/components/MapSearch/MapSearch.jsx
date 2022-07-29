@@ -16,7 +16,11 @@ import usePlacesAutocomplete, {
 
 //---------------------IMPORTS---------------------//
 function MapSearch(props) {
-  // deconstructed object returned from usePlacesAutocoplete
+  // destructure results from usePlacesAutocomplete
+  // ready / if autocomplete is ready to perform
+  // value / state that autocomplete is reading
+  // suggestions / includes status of autocomplete and returned data
+  // setValue / update value state
   const {
     ready,
     value,
@@ -25,20 +29,27 @@ function MapSearch(props) {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
+      // set a location to prefer locations around (expects a function)
       location: { lat: () => 45.56477, lng: () => -94.317886 },
+      // radius (in meters) from that location
       radius: 200 * 1000,
     },
   });
 
+  // called when an address is selected
   const panToAddress = async (address) => {
+    // set the value of autocomplete to the selected address
     setValue(address, false);
+    // clear all autocomplete suggestions
     clearSuggestions();
-    console.log("address");
+    // try catch block for api calls
     try {
+      // get the geocode of the selected address
       const results = await getGeocode({ address });
+      // get the lat/lng from the returned geocode
       const { lat, lng } = await getLatLng(results[0]);
+      // pan to that location
       props.panTo({ lat, lng });
-      console.log(lat, lng);
     } catch (err) {
       console.log(err);
       alert("error panning to location");

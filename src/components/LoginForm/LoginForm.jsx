@@ -1,3 +1,5 @@
+//---------------------IMPORTS---------------------//
+// libraries
 import {
   Button,
   ButtonGroup,
@@ -10,11 +12,17 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 function LoginForm() {
+  //---------------------LOCAL STATE---------------------//
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  //---------------------REDUCER STATE---------------------//
   const errors = useSelector((store) => store.errors);
+
+  //---------------------IMPORTED OBJECTS---------------------//
   const dispatch = useDispatch();
 
+  //---------------------EVENT HANDLERS---------------------//
   const login = (event) => {
     event.preventDefault();
 
@@ -43,6 +51,7 @@ function LoginForm() {
     dispatch({ type: "CLEAR_LOGIN_ERROR" });
   };
 
+  //---------------------JSX RETURN---------------------//
   return (
     <form onSubmit={login}>
       <Typography variant="h3">login</Typography>

@@ -3,12 +3,10 @@
 import {
   Avatar,
   Button,
-  ButtonGroup,
   Card,
   CardContent,
   CardHeader,
   Grid,
-  styled,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -69,6 +67,7 @@ function ForeignUserProfile() {
   };
 
   const onUnfollow = () => {
+    // dispatch put saga to remove follow to junction table
     dispatch({
       type: "UPDATE_FOLLOWING",
       payload: { idToFollow: thisUserId.id, following: false },
