@@ -130,8 +130,8 @@ router.post(
       req.body.title,
       req.body.description,
       // slice to remove "public/" from path
-      req.files.audio[0].path.slice(7),
-      req.files.picture[0].path.slice(7),
+      req.files.audio[0].path,
+      req.files.picture[0].path,
     ];
     console.log(newPostValues);
 

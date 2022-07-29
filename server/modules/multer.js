@@ -23,6 +23,7 @@ const assetStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "field",
+    resource_type: "auto",
   },
 });
 
