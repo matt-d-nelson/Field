@@ -53,7 +53,7 @@ function EditProfile() {
         payload: {
           open: true,
           type: "error",
-          message: "Please upload a supported image type.",
+          message: "please upload a supported image type.",
         },
       });
     } else {

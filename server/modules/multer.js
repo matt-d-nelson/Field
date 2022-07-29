@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 //---------------------HELPER FUNCTIONS---------------------//
+// unused with cloudinary file upload / keeping as a momento <3
 function removeWhitespace(filename) {
   const returnFilename = filename.split(" ");
   return returnFilename.join("");
@@ -26,15 +27,6 @@ const assetStorage = new CloudinaryStorage({
     resource_type: "auto",
   },
 });
-
-// const assetStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "public/assets");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + removeWhitespace(file.originalname));
-//   },
-// });
 
 // create a multer upload object
 const upload = multer({ storage: assetStorage });

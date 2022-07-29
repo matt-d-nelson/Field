@@ -23,7 +23,7 @@ function FilterPosts() {
         payload: {
           open: true,
           type: "error",
-          message: "Please input a tag to filter posts by.",
+          message: "please input a tag to filter posts by.",
         },
       });
     } else {

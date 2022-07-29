@@ -102,7 +102,7 @@ function EditPost() {
           open: true,
           type: "error",
           message:
-            "Please input a title and ensure that any new audio and/or image files are of a supported file type.",
+            "please input a title and ensure that any new audio and/or image files are of a supported file type.",
         },
       });
     } else {
@@ -138,7 +138,7 @@ function EditPost() {
       payload: {
         open: true,
         type: "confirm",
-        message: `Once deleted, ${thisPost.title} will be gone forever`,
+        message: `once deleted, ${thisPost.title} will be gone forever`,
         confirmDispatch: {
           type: "DELETE_POST",
           payload: { postId: thisPostId.id, userId: thisPost.user_id },
@@ -297,7 +297,6 @@ function EditPost() {
                   marginLeft: "7px",
                   width: "200px",
                 }}
-                color="info"
               >
                 <Typography variant="h4">cancel</Typography>
               </Button>

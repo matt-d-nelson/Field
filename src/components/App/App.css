@@ -21,7 +21,7 @@ body {
   margin: 0px;
   text-align: center;
   background-image: url("../../../public/images/background.png");
-  background-size: cover;
+  background-size: 120% 120%;
 }
 
 img {

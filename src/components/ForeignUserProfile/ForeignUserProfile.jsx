@@ -62,7 +62,7 @@ function ForeignUserProfile() {
         payload: {
           open: true,
           type: "error",
-          message: `Please log in or create an accout to follow ${posts[0].username}`,
+          message: `please log in or create an accout to follow ${posts[0].username}`,
         },
       });
     }

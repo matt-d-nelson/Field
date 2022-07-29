@@ -327,13 +327,13 @@ function generateUpdateQuery(requestObject, requestFiles) {
   ];
   let indexCount = 0;
   let queryString = `UPDATE "post" SET title = $1, description = $2, lat = $3, lng = $4`;
-  if (requestObject.picture != "") {
-    queryValues.push(requestFiles.picture[0].path.slice(7));
+  if (requestFiles.picture != undefined) {
+    queryValues.push(requestFiles.picture[0].path);
     queryString += `, image = $5`;
     indexCount++;
   }
-  if (requestObject.audio != "") {
-    queryValues.push(requestFiles.audio[0].path.slice(7));
+  if (requestFiles.audio != undefined) {
+    queryValues.push(requestFiles.audio[0].path);
     queryString += `, audio = $${5 + indexCount}`;
     indexCount++;
   }
