@@ -1,3 +1,4 @@
+//---------------------IMPORTS---------------------//
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
@@ -319,13 +320,16 @@ router.delete("/:id/:userid", rejectUnauthenticated, (req, res) => {
 //---------------------HELPER FUNCTIONS---------------------//
 
 function generateUpdateQuery(requestObject, requestFiles) {
+  // declare values array with request vals
   let queryValues = [
     requestObject.title,
     requestObject.description,
     requestObject.lat,
     requestObject.lng,
   ];
+  // declare indexCount var that gets added to the query string and increments if audio or a picture was uploaded
   let indexCount = 0;
+  // declare base query string
   let queryString = `UPDATE "post" SET title = $1, description = $2, lat = $3, lng = $4`;
   if (requestFiles.picture != undefined) {
     queryValues.push(requestFiles.picture[0].path);
