@@ -27,7 +27,7 @@ function EditProfile() {
 
   //---------------------USE EFFECT---------------------//
   useEffect(() => {
-    if (user != {}) {
+    if (user != {} && user.about != null) {
       setAbout(user.about);
     }
   }, [user]);
