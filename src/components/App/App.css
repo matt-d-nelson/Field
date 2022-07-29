@@ -67,6 +67,11 @@ Various
   all: unset;
 }
 
+.gm-style-iw-t::after {
+  all: unset;
+  background-color: transparent !important;
+}
+
 /* styling for post card display */
 .postHeader {
   text-align: left;
