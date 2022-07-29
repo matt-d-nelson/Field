@@ -20,6 +20,7 @@ cloudinary.config({
 
 //---------------------MULTER---------------------//
 // configure where to send assets to
+// resource type auto to allow image and audio uploads
 const assetStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
