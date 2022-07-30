@@ -74,13 +74,13 @@ function MapView() {
   // ensure map is loaded without error before returning
   if (loadError)
     return (
-      <div>
+      <div style={{ paddingTop: "90px" }}>
         <p>loading...</p>
       </div>
     );
   if (!isLoaded)
     return (
-      <div>
+      <div style={{ paddingTop: "90px" }}>
         <p>error loading map</p>
       </div>
     );

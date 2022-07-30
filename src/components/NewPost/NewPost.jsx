@@ -172,6 +172,7 @@ function NewPost() {
                 label="tags"
                 fullWidth
                 onChange={onTagsChange}
+                placeholder="enter single word tags separated by a ','"
               />
             </Grid>
             <Grid container justifyContent="space-evenly">
