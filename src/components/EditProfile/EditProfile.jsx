@@ -109,7 +109,7 @@ function EditProfile() {
                   onChange={onPictureChange}
                   hidden
                 />
-                <Typography variant="h4">upload picture</Typography>
+                <Typography variant="h4">upload image</Typography>
               </Button>
               <Typography variant="h4">file: {picturePath}</Typography>
             </Grid>
