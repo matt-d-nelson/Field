@@ -98,7 +98,7 @@ Feed
 - Click the 'feed' button to see the posts of all the users you follow.`;
 
 const thanks = `Thanks to: 
-- my friends and family (especially my partner Nina) for all the support and encouragement.  
+- my family (especially my partner Nina) and friends for all the support and encouragement.  
 - Sam Nelson for teaching me some of his low level developer knowledge.
 - Rob Johnson for encouraging me to go to Prime and offering advice and feedback along the way.
 - everyone in the Dorian cohort for learning with me and laughing at all my amazing jokes.

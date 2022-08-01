@@ -25,7 +25,7 @@ function ForeignUserProfile() {
 
   //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
-  const posts = useSelector((store) => store.posts);
+  const posts = useSelector((store) => store.foreignUserPosts);
   const followedPosts = useSelector((store) => store.followedPosts);
 
   //---------------------LOCAL STATE---------------------//
@@ -33,7 +33,7 @@ function ForeignUserProfile() {
 
   //---------------------ON MOUNT---------------------//
   useEffect(() => {
-    dispatch({ type: "GET_USER_POSTS", payload: thisUserId.id });
+    dispatch({ type: "GET_FOREIGN_USER_POSTS", payload: thisUserId.id });
     // if a user is logged in
     if (user.id) {
       // load followed table to conditionally render follow/unfollow button
