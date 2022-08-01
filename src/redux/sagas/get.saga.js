@@ -22,11 +22,28 @@ function* getPosts() {
     });
   }
 }
-// get all the posts of a specific user
+// get all the posts of a specific user store data in userPosts reducer
 function* getUserPosts(action) {
   try {
     const posts = yield axios.get(`/api/asset/user/${action.payload}`);
     yield put({ type: "SET_USER_POSTS", payload: posts.data });
+  } catch (err) {
+    console.log(err);
+    yield put({
+      type: "OPEN_MODAL",
+      payload: {
+        open: true,
+        type: "error",
+        message: "we are unable to load any posts",
+      },
+    });
+  }
+}
+// get all the posts of a specific user store data in foreignUserPosts reducer
+function* getForeignUserPosts(action) {
+  try {
+    const posts = yield axios.get(`/api/asset/user/${action.payload}`);
+    yield put({ type: "SET_FOREIGN_USER_POSTS", payload: posts.data });
   } catch (err) {
     console.log(err);
     yield put({
@@ -113,6 +130,7 @@ function* getSaga() {
   yield takeLatest("GET_FOLLOWED_USER_POSTS", getFollowedUserPosts);
   yield takeLatest("GET_FILTERED_POSTS", getFilteredPosts);
   yield takeLatest("GET_POST_TAGS", getPostTags);
+  yield takeLatest("GET_FOREIGN_USER_POSTS", getForeignUserPosts);
 }
 
 export default getSaga;
