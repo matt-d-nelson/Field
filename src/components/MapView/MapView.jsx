@@ -49,9 +49,11 @@ function MapView() {
   const [selected, setSelected] = useState(null);
 
   //---------------------ON MOUNT---------------------//
-  // get posts
   useEffect(() => {
+    // get posts
     dispatch({ type: "GET_POSTS" });
+    // clear foreign user posts
+    dispatch({ type: "SET_FOREIGN_USER_POSTS", payload: [] });
   }, []);
 
   //---------------------GOOGLE MAP SETUP---------------------//
