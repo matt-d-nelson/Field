@@ -25,7 +25,7 @@ function ForeignUserProfile() {
 
   //---------------------REDUCER STATE---------------------//
   const user = useSelector((store) => store.user);
-  const posts = useSelector((store) => store.posts);
+  const posts = useSelector((store) => store.userPosts);
   const followedPosts = useSelector((store) => store.followedPosts);
 
   //---------------------LOCAL STATE---------------------//

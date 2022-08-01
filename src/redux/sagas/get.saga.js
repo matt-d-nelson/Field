@@ -26,7 +26,7 @@ function* getPosts() {
 function* getUserPosts(action) {
   try {
     const posts = yield axios.get(`/api/asset/user/${action.payload}`);
-    yield put({ type: "SET_POSTS", payload: posts.data });
+    yield put({ type: "SET_USER_POSTS", payload: posts.data });
   } catch (err) {
     console.log(err);
     yield put({
