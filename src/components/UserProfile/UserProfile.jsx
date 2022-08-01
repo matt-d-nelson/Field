@@ -36,6 +36,8 @@ function UserProfile() {
   useEffect(() => {
     dispatch({ type: "GET_USER_POSTS", payload: user.id });
     dispatch({ type: "GET_FOLLOWED_USER_POSTS" });
+    // clear foreign user posts
+    dispatch({ type: "SET_FOREIGN_USER_POSTS", payload: [] });
   }, []);
 
   //---------------------EVENT HANDLERS---------------------//
