@@ -11,9 +11,13 @@ This application was created durring a 2 week sprint as part of the curriculum f
 
 ![fieldDemo](https://user-images.githubusercontent.com/98720000/181917474-8850a8e5-8779-4ab8-90fa-63e5778adbd9.gif)
 
-Visit the hosted app!
+Visit the hosted app:
 ------
 https://powerful-anchorage-40126.herokuapp.com/#/
+
+Watch a demo presentation:
+------
+https://vimeo.com/manage/videos/736200022
 
 ## Acknowledgement
 Thanks to: 
