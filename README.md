@@ -17,7 +17,7 @@ https://powerful-anchorage-40126.herokuapp.com/#/
 
 Watch a demo presentation:
 ------
-https://vimeo.com/manage/videos/736200022
+https://vimeo.com/736200022
 
 ## Acknowledgement
 Thanks to: 
